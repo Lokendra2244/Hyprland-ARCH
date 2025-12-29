@@ -1,0 +1,7 @@
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "d896656"
+hash = "62251f94eb67648d42cdfcfb8be0fad2"
+
+[flavor]
+deps = []
