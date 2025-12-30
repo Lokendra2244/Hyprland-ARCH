@@ -283,22 +283,34 @@ bindl = , XF86AudioStop, exec, brightnessctl -e4 -n2 set 5%+
 ## RULES ##
 ###########
 
-windowrule = float on, size 420 250, stay_focused on, match:class (clipse)
-windowrule = float on, move (815) (30), stay_focused on, border_size 0, match:class (org.pulseaudio.pavucontrol)
-windowrule = size 400 300, match:class (org.pulseaudio.pavuconrol)
-windowrule = float on, size 350 265, move (1100) (500), border_size 0, match:title (cava)
-windowrule = pseudo on, size 240 100, move (1140) (200), border_size 0, match:class (com.mitchellh.ghostty), match:title (tty-clock)
-windowrule = opacity 0.6 override 0.4 override, match:class ^(Spotify)$
-windowrule = idle_inhibit fullscreen, match:class ^(*)$
-windowrule = idle_inhibit fullscreen, match:title ^(*)$
-windowrule = idle_inhibit fullscreen, match:fullscreen 1
+windowrule = float, class:(clipse)
+windowrule = size 420 250,class:(clipse)
+windowrule = stayfocused, class:(clipse)
+windowrule = float, class:(org.pulseaudio.pavucontrol)
+windowrule = size 400 300, class:(org.pulseaudio.pavuconrol)
+windowrule = move 815 30, class:(org.pulseaudio.pavucontrol)
+windowrule = stayfocused, class:(org.pulseaudio.pavucontrol)
+windowrule = noborder, class:(org.pulseaudio.pavucontrol)
+windowrule = float, title:(cava)
+windowrule = size 350 265, title:(cava)
+windowrule = move 1100 500, title:(cava)
+windowrule = noborder, title:(cava)
+windowrule = pseudo,class:(com.mitchellh.ghostty), title:(tty-clock)
+windowrule = size 240 100,class:(com.mitchellh.ghostty), title:(tty-clock)
+windowrule = move 1140 200, class:(com.mitchellh.ghostty),title:(tty-clock)
+windowrule = noborder,class:(com.mitchellh.ghostty), title:(tty-clock)
+windowrule = opacity 0.6 override 0.4 override,class:^(Spotify)$
+windowrulev2 = idleinhibit fullscreen, class:^(*)$
+windowrulev2 = idleinhibit fullscreen, title:^(*)$
+windowrulev2 = idleinhibit fullscreen, fullscreen:1
 
 
 #layerrule for apps where hypr;and doesn't affect directly like logout menu
 
-layerrule = blur on, match:namespace logout_dialog
-layerrule = blur on, match:namespace gtk-layer-shell
-layerrule = ignore_alpha [0.1], blur on, match:namespace rofi
+layerrule  = blur, logout_dialog
+layerrule  = blur, gtk-layer-shell
+layerrule  = ignorealpha [0.1], rofi
+layerrule  = blur , rofi
 
 ###########
 ## BINDS ##
