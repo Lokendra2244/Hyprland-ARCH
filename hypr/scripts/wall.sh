@@ -14,44 +14,50 @@ mapfile -t WALLPAPERS <"$WALL_LIST"
 
 # Find index of last used wallpaper
 LAST_INDEX=0
+LAST_WALL=""
 if [ -f "$LAST_USED" ]; then
-	LAST_WALL=$(cat "$LAST_USED")
-	for i in "${!WALLPAPERS[@]}"; do
-		[[ "${WALLPAPERS[$i]}" == "$LAST_WALL" ]] && LAST_INDEX=$i && break
-	done
+    LAST_WALL=$(cat "$LAST_USED")
+    for i in "${!WALLPAPERS[@]}"; do
+        [[ "${WALLPAPERS[$i]}" == "$LAST_WALL" ]] && LAST_INDEX=$i && break
+    done
 fi
 
 # Calculate next wallpaper index (wrap around)
 NEXT_INDEX=$(((LAST_INDEX + 1) % ${#WALLPAPERS[@]}))
 WALLPAPER="${WALLPAPERS[$NEXT_INDEX]}"
 
+# Validate the file
+if ! identify "$WALLPAPER" &>/dev/null; then
+    echo "Invalid image: $WALLPAPER"
+    exit 1
+fi
+
 # Store the selected wallpaper
 echo "$WALLPAPER" >"$LAST_USED"
 
-# Validate the file
-if ! identify "$WALLPAPER" &>/dev/null; then
-	echo "Invalid image: $WALLPAPER"
-	exit 1
+# 1. Generate pywal colors (Add -n to skip setting wallpaper, we do it manually)
+wal -i "$WALLPAPER" -n
+
+# 2. Ensure hyprpaper is running. If not, start it.
+if ! pgrep -x "hyprpaper" > /dev/null; then
+    hyprpaper &
+    # Wait for the socket to be ready
+    for i in {1..10}; do
+        if hyprctl hyprpaper listloaded &>/dev/null; then break; fi
+        sleep 0.1
+    done
 fi
 
-# Generate pywal colors
-wal -i "$WALLPAPER"
-
-# Restart hyprpaper cleanly
-killall -q hyprpaper
-sleep 0.2
-hyprpaper &
-
-# Wait until IPC is available (max 3s)
-for i in {1..30}; do
-	if hyprctl hyprpaper preload "$WALLPAPER" &>/dev/null; then
-		break
-	fi
-	sleep 0.1
-done
-
-# Apply wallpaper via IPC
+# 3. Preload the NEW wallpaper (Required before setting it)
 hyprctl hyprpaper preload "$WALLPAPER"
+
+# 4. Apply the wallpaper
 hyprctl hyprpaper wallpaper "$MONITOR,$WALLPAPER"
 hyprctl hyprpaper wallpaper "$MONITOR1,$WALLPAPER"
-# Relaunch themed overlays (optional)
+
+# 5. Unload the OLD wallpaper to free memory (Instant cleanup)
+if [ -n "$LAST_WALL" ] && [ "$LAST_WALL" != "$WALLPAPER" ]; then
+    hyprctl hyprpaper unload "$LAST_WALL"
+fi
+
+
