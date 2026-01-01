@@ -1,44 +1,42 @@
 #!/bin/bash
 # ── brightness.sh ─────────────────────────────────────────
-# Description: Shows current brightness with ASCII bar + tooltip
-# Usage: Waybar `custom/brightness` every 2s
-# Dependencies: brightnessctl, seq, printf, awk
-#  ─────────────────────────────────────────────────────────
 
 # Get brightness percentage
 brightness=$(brightnessctl get)
 max_brightness=$(brightnessctl max)
 percent=$((brightness * 100 / max_brightness))
 
-# Build ASCII bar
-
-if [ "$percent" -eq 100 ]; then
-    ascii_bar="|$(printf '▓%.0s' $(seq 1 10))|"  # 10 filled blocks
-elif [ "$percent" -eq 0 ]; then
-    ascii_bar="|$(printf '░%.0s' $(seq 1 10))|"  # 10 empty blocks
-else
-    filled=$((percent / 10))
-    empty=$((10 - filled))
-    ascii_bar="|$(printf '▓%.0s' $(seq 1 $filled))$(printf '░%.0s' $(seq 1 $empty))|"
-fi
+# Device name (first column from brightnessctl --machine-readable)
+device=$(brightnessctl --machine-readable | awk -F, 'NR==1 {print $1}')
 
 # Icon
 icon="󰛨"
 
-# Color thresholds
-if [ "$percent" -lt 20 ]; then
-    fg="#bf616a"  # red
-elif [ "$percent" -lt 55 ]; then
-    fg="#000000"  # orange
-else
-    fg="#000000"  # cyan
-fi
+# ASCII Bar (Fixed using String Slicing)
+bar_full="▓▓▓▓▓▓▓▓▓▓"
+bar_empty="░░░░░░░░░░"
 
-# Device name (first column from brightnessctl --machine-readable)
-device=$(brightnessctl --machine-readable | awk -F, 'NR==1 {print $1}')
+# Calculate filled and empty blocks
+filled=$((percent / 10))
+empty=$((10 - filled))
+
+# Handle the 100% edge case where math might give >10 if percent > 100
+if [ "$filled" -gt 10 ]; then filled=10; empty=0; fi
+
+# Slice strings to prevent the "5%" bug
+ascii_bar="|${bar_full:0:$filled}${bar_empty:0:$empty}|"
+
+# Class logic (Replaces hardcoded colors)
+if [ "$percent" -lt 20 ]; then
+    css_class="low"
+elif [ "$percent" -lt 55 ]; then
+    css_class="medium"
+else
+    css_class="high"
+fi
 
 # Tooltip text
 tooltip="Brightness: $percent%\nDevice: $device"
 
-# JSON output
-echo "{\"text\":\"<span foreground='$fg'> [ $icon $ascii_bar] </span>\",\"tooltip\":\"$tooltip\"}"
+# Final JSON output
+echo "{\"text\":\" [ $icon $ascii_bar] \",\"tooltip\":\"$tooltip\",\"class\":\"$css_class\"}"

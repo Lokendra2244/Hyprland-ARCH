@@ -1,18 +1,15 @@
 #!/bin/bash
 # ── volume.sh ─────────────────────────────────────────────
-# Description: Shows current audio volume with ASCII bar + tooltip
-# Usage: Waybar `custom/volume` every 1s
-# Dependencies: wpctl, awk, bc, seq, printf
-# ───────────────────────────────────────────────────────────
 
 # Get raw volume and convert to int
 vol_raw=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+# Handle potential floating point math and ensure integer output
 vol_int=$(echo "$vol_raw * 100" | bc | awk '{ print int($1) }')
 
 # Check mute status
 is_muted=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo true || echo false)
 
-# Get default sink description (human-readable)
+# Get default sink description
 sink=$(wpctl status | awk '/Sinks:/,/Sources:/' | grep '\*' | cut -d'.' -f2- | sed 's/^\s*//; s/\[.*//')
 
 # Icon logic
@@ -25,29 +22,34 @@ else
   icon=""
 fi
 
-# ASCII bar
+# Define the full bars once
+bar_full="▓▓▓▓▓▓▓▓▓▓"
+bar_empty="░░░░░░░░░░"
 
 if [ "$vol_int" -ge 100 ]; then
-    # Print 10 filled blocks for 100% and above
-    ascii_bar="|$(printf '▓%.0s' $(seq 1 10))|"
+    ascii_bar="|$bar_full|"
 elif [ "$vol_int" -eq 0 ]; then
-    # Print 10 empty blocks for 0%
-    ascii_bar="|$(printf '░%.0s' $(seq 1 10))|"
+    ascii_bar="|$bar_empty|"
 else
+    # Calculate how many filled blocks we need (0-9)
     filled=$((vol_int / 10))
+    
+    # Calculate empty blocks
     empty=$((10 - filled))
 
-    ascii_bar="|$(printf '▓%.0s' $(seq 1 $filled))$(printf '░%.0s' $(seq 1 $empty))|"
+    # Slice the strings: ${string:start:length}
+    ascii_bar="|${bar_full:0:$filled}${bar_empty:0:$empty}|"
 fi
 
-
-# Color logic
-if [ "$is_muted" = true ] || [ "$vol_int" -lt 10 ]; then
-  fg="#bf616a" # red
+# Class logic (Replaces hardcoded colors)
+if [ "$is_muted" = true ]; then
+    css_class="muted"
+elif [ "$vol_int" -lt 10 ]; then
+    css_class="critical"
 elif [ "$vol_int" -lt 50 ]; then
-  fg="#fab387" # orange
+    css_class="warning"
 else
-  fg="#000000" # cyan
+    css_class="normal" # This handles your >50% case
 fi
 
 # Tooltip text
@@ -57,5 +59,8 @@ else
   tooltip="Audio: $vol_int%\nOutput: $sink"
 fi
 
+# ... existing logic ...
+
 # Final JSON output
-echo " {\"text\":\"<span foreground='$fg'> [ $icon $ascii_bar] </span>\",\"tooltip\":\"$tooltip\"}"
+# Notice we added the "class" field and removed the <span foreground=...> wrapper
+echo "{\"text\":\" [ $icon $ascii_bar] \",\"tooltip\":\"$tooltip\",\"class\":\"$css_class\"}"

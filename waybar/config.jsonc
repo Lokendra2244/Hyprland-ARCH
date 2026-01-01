@@ -9,6 +9,7 @@
     "modules-left": [
         //"battery",
         "clock",
+        "custom/ethname",
         "network",
      //   "hyprland/mode",
     //  "hyprland/window",
@@ -187,16 +188,41 @@
         "power-saver": ""
       }
     },
+    //"network": {
+    //    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    //    "exec": "~/.config/waybar/scripts/wired_name.sh",
+    //    "return-typ":"json",
+    //    "on-click": "$HOME/.config/waybar/scripts/hotspot.sh",
+    //    "on-click-right": "ghostty -e nmtui",
+    //    "format-wifi": " [ {signalStrength}%   ] ",
+    //    "format-ethernet": " [  {}] ",
+    //    "tooltip-format": " {} ",
+    //    "format-linked": " [ (No IP)  ] ",
+    //    "format-disconnected": " [ Disconnected ⚠ ] ",
+    //    "tooltip":false
+    //},
+    // 1. Built-in Network (Handles Wi-Fi, Hides for Ethernet)
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh",
-        "on-click-right": "ghostty -e nmtui",
-        "format-wifi": " [ {signalStrength}%   ] ",
-        "format-ethernet": " [  ] ",
-        "tooltip-format": " {} ",
-        "format-linked": " [ (No IP)  ] ",
+        "format-wifi": " [ {signalStrength}%  ] ",
+        "max-length" : 15, 
+        "format-ethernet": "",  // <--- Empty string hides this module when wired
         "format-disconnected": " [ Disconnected ⚠ ] ",
-        "tooltip":false
+        "format-linked": " [ (No IP)  ] ",
+        "tooltip-format": " {} ",
+        "on-click-right": "ghostty -e nmtui",
+        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
+    },
+
+    // 2. Custom Ethernet (Shows Profile Name, Hides for Wi-Fi)
+    "custom/ethname": {
+        "exec": "~/.config/waybar/scripts/wired_name.sh",
+        "return-type": "json",
+        "interval": 5,
+        "max-length":15,
+        "format": " [ {}] ", 
+        "on-click-right": "ghostty -e nmtui",
+        "tooltip": false,
+        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
     },
     "pulseaudio": {
          "scroll-step": 1,//%, can be a float
@@ -226,9 +252,10 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
      },
     "custom/spotify": {
-       "format": "    {} ",
+       "format": "   {} ",
        "exec": "~/.config/waybar/scripts/status.sh",
        "interval": 1,
+       "max-length":35,
        "on-click": "playerctl --player=spotify play-pause",
        "on-double-click": "playerctl --player=spotify next",
        "on-click-right": "playerctl --player=spotify previous",
