@@ -44,7 +44,7 @@ fi
 # Class logic (Replaces hardcoded colors)
 if [ "$is_muted" = true ]; then
     css_class="muted"
-elif [ "$vol_int" -lt 10 ]; then
+elif [ "$vol_int" -lt 20 ]; then
     css_class="critical"
 elif [ "$vol_int" -lt 50 ]; then
     css_class="warning"
