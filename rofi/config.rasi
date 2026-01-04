@@ -1,5 +1,5 @@
 configuration {
-	modes: "window,drun,filebrowser,emoji";
+	modes: "";
 	font: "Nerd Font Mono 20";
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -160,10 +160,6 @@ configuration {
   timeout {
       action: "kb-cancel";
       delay:  0;
-  }
-  filebrowser {
-      directories-first: true;
-      sorting-method:    "name";
   }
 }
 

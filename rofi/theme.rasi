@@ -42,13 +42,13 @@ window {
     anchor:           center;
     y-offset:         90px;
     background-color: var(transparent);
-    border-radius:    0px ;
+    border-radius:    10px ;
     border:           0px ;
     spacing:          0;
 }
 mainbox {
     spacing:  0;
-    children: [ "inputbar","message","listview","mode-switcher" ];
+    children: [ "inputbar","message","listview" ];
 }
 message {
     padding:          10;
@@ -130,26 +130,7 @@ vertb {
     expand:   false;
     children: [ "mode-switcher"];
 }
-mode-switcher {
-    orientation: horizontal;
-    expand:      false;
-    spacing:     4px ;
-}
-button {
-    border-color: @selected-active-background;
-    border: 1px;
-    margin:           4px;
-    width:            2px;
-    text-color:       rgba(255,255,255,0.7);
-    padding:          2px ;
-    background-color: rgba(0,0,0,0.6);
-    font:             "FiraCode Nerd Font 11";
-}
-button selected.normal {
-    background-color: @selected-active-background;
-    border-color:     var(foreground);
-    border: 0px;
-}
+
 error-message {
     padding:          1.0000em ;
     background-color: Red;
