@@ -1,0 +1,288 @@
+// -*- mode: jsonc -*-
+{    "margin":  "10 9 0 9",      
+     "layer": "top", // Waybar at top layer
+    //"position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 7, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        //"battery",
+        "clock",
+        "custom/ethname",
+        "network",
+     //   "hyprland/mode",
+    //  "hyprland/window",
+    //    "sway/scratchpad",
+   //   "bluetooth",
+        "cpu", 
+        "custom/visualizer",
+        "custom/spotify"
+    ],
+    "modules-center": [
+          "niri/workspaces",
+    ],
+    "modules-right": [
+         "custom/appname",
+   //     "pulseaudio",
+        "custom/volume",
+        "custom/battery",
+        "custom/backlight"
+   //     "power-profiles-daemon",
+   //   "memory",
+   //     "keyboard-state",
+   //     "sway/language",
+   //     "battery#bat2"
+   //   "custom/power"
+    ],
+    // Modules configuration
+     "niri/workspaces": {
+         "persistent-only": false,
+         "disable-scroll": true,
+         "all-outputs": false,
+         "warp-on-scroll": false,
+         "persistent-workspaces":{
+          "*": [1, 2, 3, 4],
+          },
+         "active":{
+         "height":20        
+          },
+         "format": "{icon}",
+         "format-icons": {
+         "urgent": "",
+         }
+     },
+
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "mpd": {
+      "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+    "format-disconnected": "Disconnected ",
+  "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+           "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        }, 
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+         "icon-size": 21,
+        "spacing": 10,
+         "icons": {
+           "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+         }
+    },
+    "clock": {
+        "format": " [ 󰅑 {:%I:%M %p} ] ",
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " [ {:%Y-%m-%d} ] ",
+        "on-click-right" : "/home/lokendra/.config/waybar/scripts/clock.sh",
+    },
+    "cpu": {
+        "on-click":  "ghostty -e  htop",
+        "format": " [ {usage}%  ] ",
+        "interval": "0.1",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    
+     "custom/backlight": {
+          "exec": "~/.config/waybar/scripts/brightness.sh",
+          "return-type": "json",
+          "interval": 1,
+          "on-click": "hyprshade on blue-light-filter",
+          "on-click-right":"hyprshade off",
+          "on-scroll-up": "brightnessctl set +5%",
+          "on-scroll-down": "brightnessctl set 5%-"
+       },
+ 
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": " [ {percent}% {icon} ] ",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "custom/battery": {
+       "exec": "~/.config/waybar/scripts/battery.sh",
+       "return-type": "json",
+       "interval": 2,
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": " [ {icon} {capacity}% ] ",
+        "format-full": " [ {icon} {capacity}% ] ",
+        "format-charging": " [  {capacity}% ] ",
+        "format-plugged": " [  {capacity}% ] ",
+        "format-alt": " [ {time} {icon} ] ",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["󰂃", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂀", "󰂂", "󰁹"]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+    //"network": {
+    //    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    //    "exec": "~/.config/waybar/scripts/wired_name.sh",
+    //    "return-typ":"json",
+    //    "on-click": "$HOME/.config/waybar/scripts/hotspot.sh",
+    //    "on-click-right": "ghostty -e nmtui",
+    //    "format-wifi": " [ {signalStrength}%   ] ",
+    //    "format-ethernet": " [  {}] ",
+    //    "tooltip-format": " {} ",
+    //    "format-linked": " [ (No IP)  ] ",
+    //    "format-disconnected": " [ Disconnected ⚠ ] ",
+    //    "tooltip":false
+    //},
+    // 1. Built-in Network (Handles Wi-Fi, Hides for Ethernet)
+    "network": {
+        "format-wifi": " [ {signalStrength}%   {essid}] ",
+        "max-length" : 15, 
+        "format-ethernet": "",  // <--- Empty string hides this module when wired
+        "format-disconnected": " [ Disconnected ⚠ ] ",
+        "format-linked": " [ (No IP)  ] ",
+        "tooltip-format": " {} ",
+        "on-click-right": "ghostty -e nmtui",
+        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
+    },
+
+    // 2. Custom Ethernet (Shows Profile Name, Hides for Wi-Fi)
+    "custom/ethname": {
+        "exec": "~/.config/waybar/scripts/wired_name.sh",
+        "return-type": "json",
+        "interval": 5,
+        "max-length":15,
+        "format": " [ {}] ",
+        "format-disconnected": "", 
+        "on-click-right": "ghostty -e nmtui",
+        "tooltip": false,
+        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
+    },
+    "pulseaudio": {
+         "scroll-step": 1,//%, can be a float
+        "format": " [ {volume}% {icon} | {format_source} ] ",
+        "format-bluetooth": " [ {volume}% {icon} | {format_source} ] ",
+        "format-bluetooth-muted": " [ 󰝟 {icon} {format_source} ] ",
+        "format-muted": " [ 󰝟 {format_source} ] ",
+        "format-source": "{volume}% ",
+        "format-source-muted": "  ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": " pavucontrol"
+    },
+     "custom/volume": {
+        "exec": "~/.config/waybar/scripts/volume.sh",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+     },
+    "custom/spotify": {
+       "format": "   {} ",
+       "exec": "~/.config/waybar/scripts/status.sh",
+       "interval": 1,
+       "max-length":35,
+       "on-click": "playerctl --player=spotify play-pause",
+       "on-double-click": "playerctl --player=spotify next",
+       "on-click-right": "playerctl --player=spotify previous",
+       "on-scroll-up": "/home/lokendra/.config/waybar/scripts/ncvol.sh up",
+       "on-scroll-down": "/home/lokendra/.config/waybar/scripts/ncvol.sh down"
+    },
+
+    "custom/power": {
+        "format" : " ⏻ ",
+        "icon-size" : 10,
+	"tooltip": true,
+        "on-click" : "wlogout"
+    },
+    "custom/appname": {
+       "exec": "~/.config/waybar/scripts/gappname.sh",
+       "return-type": "text",
+       "format": " {} ",
+       "tooltip": false
+   },
+    "bluetooth": {
+        "format": "   {status}   ",
+        "on-click": "/home/lokendra/rofi-bluetooth/rofi-bluetooth"
+   },
+   "custom/visualizer": {
+       "exec": "/home/lokendra/.config/waybar/scripts/visualize.sh",
+       "return-type": "json",
+       "format": " {} ", 
+       "interval": 0
+    }
+}
