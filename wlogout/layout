@@ -8,7 +8,7 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit",
+    "action" : "hyprctl dispatch exit || niri msg action quit",
     "text" : "Logout",
     "keybind" : "e",
     "height":1, 

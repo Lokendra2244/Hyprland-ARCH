@@ -44,8 +44,6 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
  
-theme = /home/lokendra/.cache/wal/ghostty.conf
-
 #key-bind
 keybind = ctrl+super+arrow_down=goto_split:down
 keybind = ctrl+super+arrow_up=goto_split:up
@@ -56,3 +54,6 @@ keybind = ctrl+alt+arrow_down=unbind
 keybind = ctrl+alt+arrow_right=unbind
 keybind = ctrl+alt+arrow_left=unbind
 keybind = global:super+shift+q=toggle_quick_terminal
+
+
+theme = /home/lokendra/.cache/wal/ghostty.conf

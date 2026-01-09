@@ -1,35 +1,37 @@
 #!/bin/bash
 
-map="$HOME/.cache/class_name_map"
+map_file="$HOME/.cache/class_name_map"
 
-# Get Hyprland active window info
-RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
-SOCKET=$(find "$RUNTIME_DIR/hypr" -name ".socket2.sock" 2>/dev/null | head -n1)
+# Loop forever (Waybar reads the continuous output)
+while true; do
+    window_class=""
+    desktop=$(echo "$XDG_CURRENT_DESKTOP" | tr '[:upper:]' '[:lower:]')
+    
+    # Fallback detection
+    if [ -z "$desktop" ]; then
+        if pgrep -x "Hyprland" >/dev/null; then desktop="hyprland"; fi
+        if pgrep -x "niri" >/dev/null; then desktop="niri"; fi
+    fi
 
-[ -z "$SOCKET" ] && exit 1
+    # Fetch Class
+    if [[ "$desktop" == *"hyprland"* ]]; then
+        window_class=$(hyprctl activewindow -j 2>/dev/null | jq -r '.class')
+    elif [[ "$desktop" == *"niri"* ]]; then
+        window_class=$(niri msg -j focused-window 2>/dev/null | jq -r '.app_id')
+    fi
 
-stdbuf -oL socat - UNIX-CONNECT:"$SOCKET" | \
-grep --line-buffered "activewindow>>" | \
-while read -r _; do
-    class=$(hyprctl activewindow -j | jq -r '.class')
-    title=$(hyprctl activewindow -j | jq -r '.title')
+    # Lookup Name
+    if [ "$window_class" == "null" ] || [ -z "$window_class" ]; then
+        echo "..."
+    else
+        pretty_name=$(grep -i -m 1 "^$window_class|" "$map_file" | cut -d'|' -f2)
+        if [ -n "$pretty_name" ]; then
+            echo "$pretty_name"
+        else
+            echo "$window_class"
+        fi
+    fi
 
-    case "$class" in
-        "kitty"|"alacritty"|"foot"|"wezterm"|"ghostty")
-            cmd=$(echo "$title" | awk '{print $1}')
-            case "$cmd" in
-                "yazi") icon="";;
-                "btm")  icon="";;
-                "nvim") icon="";;
-                "htop") icon="";;
-                *)      icon="";;
-            esac
-            echo "$icon  $cmd"
-            ;;
-        *)
-            name=$(grep -i "^$class|" "$map" | head -n1 | cut -d'|' -f2)
-            [ -z "$name" ] && name="$class"
-            echo "$name"
-            ;;
-    esac
+    # Wait 0.5s before checking again (Lower = smoother but more CPU)
+    sleep 0.5
 done

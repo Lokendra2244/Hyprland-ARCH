@@ -6,7 +6,7 @@ name=$(nmcli -t -f NAME connection show --active | head -n1)
 
 # If no connection is active, show nothing or "Offline"
 if [ -z "$name" ]; then
-    echo "{\"text\":\"Offline\", \"class\":\"disconnected\"}"
+    echo "{ \"class\":\"disconnected\"}"
 else
     # Output JSON for Waybar
     # You can change the icon () here if you want

@@ -19,3 +19,8 @@ fzf_configure_bindings --history=\cr --directory=\ct --git_log=\cl --git_status=
 
 #make fd see dotfiles
 set -g fzf_fd_opts --hidden 
+
+# Load Pywal colors if they exist
+if test -e ~/.cache/wal/sequences
+    cat ~/.cache/wal/sequences
+end
