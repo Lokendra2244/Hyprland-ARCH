@@ -1,3 +1,6 @@
+@define-color default1 rgba(60, 60, 60, 0.5);
+@define-color default2 rgba(0, 0, 0, 0.3);
+
 @import url("/home/lokendra/.cache/wal/colors-waybar.css"); 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -37,7 +40,7 @@ window#waybar.chromium {
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0  0px @color10;
+    box-shadow: inset 0  0px @color3;
     /* Avoid rounded borders under each button name */
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
@@ -53,12 +56,12 @@ button:hover {
 /* you can set a style on hover for any module like this */
 
 #workspaces button {
-      color:rgba(0,0,0,1);
-      padding: 3px 10px 3px 10px;
+      color:rgba(255,255,255,0.1);
+      padding: 2px;
       background-color:rgba(230,230,230,0);
       border-radius:0px;
-      margin:1px 8px 2px 8px;
-      transition: all 0.1s ease-in-out;
+      margin:1px 8px 2px 8px; 
+      transition: all 1s ease;
 }
 
 #workspaces button:hover {
@@ -87,7 +90,7 @@ button:hover {
 #battery,
 #cpu,
 #custom-ethname,
-#custom-memory,
+#memory,
 #disk,
 #backlight,
 #network,
@@ -106,13 +109,19 @@ button:hover {
 #custom-spotify,
 #power-profiles-daemon,
 #mpd {
+   background: linear-gradient(
+        to bottom,
+        @default1 0%,
+        @default2 100%
+    );
     box-shadow: inset -1 -1 0 0px @color5;
+    transition: all 0.2s ease;
 }
 
 #window,
 #workspaces {
-   color: @color10;
-   background-color: rgba(45,50,45,1);
+   color: @color9;
+   background-color: rgba(0,0,0,0.1);
    border-radius: 25px;
    padding: 0px 20px 2px 20px;
 }
@@ -132,14 +141,14 @@ button:hover {
 }
 
 #clock {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 25px 12px 12px 25px;
 }
 
 #custom-battery {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
 }
 
@@ -195,23 +204,14 @@ button:hover {
     background-color: rgba(40,50,30,0.9);
 }
 #cpu {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
 }
 
-#custom-memory {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
-    border-radius: 8px 8px 8px 8px;
-}
-
-#custom-memory.warning {
-    color: #ebcb8b;
- }
-
-#custom-memory.critical { 
-    color: #bf616a; 
+#memory {
+    background-color: @color1;
+    border-radius:10px;
 }
 
 #disk {
@@ -219,8 +219,8 @@ button:hover {
 }
 
 #custom-backlight {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 12px 25px 25px 12px;
 }
 
@@ -234,32 +234,32 @@ button:hover {
 
 #network {
     border-radius: 8px 8px 8px 8px;
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
 }
 
 #network.disconnected {
-    background-color: @color10;
+    background-color: @color3;
 }
 
 #network:hover {
-    background-color: rgba(40,50,30,0.9);
+    background-color: rgba(40,50,30,1);
 }
 
 #custom-ethname {
     border-radius: 8px 8px 8px 8px;
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
 }
 
 #custom-volume{
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius:8px 8px 8px 8px;
 }
 
 #custom-volume.muted {
-    color: @color10;
+    color: @color3;
 }
 
 #custom-volume.critical {
@@ -275,7 +275,7 @@ button:hover {
 }
 
 #wireplumber {
-    background-color: rgba(106,45,124,0.4);
+    background-color: rgba(106,45,124,0.1);
     border-radius:10px;
     color: #000000;
 }
@@ -285,7 +285,7 @@ button:hover {
 }
 
 #custom-media {
-    background-color: rgba(106,45,124,0.6);
+    background-color: rgba(106,45,124,0.1);
     color: #000000;
     min-width: 50px;
     border-radius: 10px;
@@ -367,11 +367,11 @@ button:hover {
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 #scratchpad.empty {
@@ -400,7 +400,7 @@ button:hover {
 }
 
 #custom-power:hover {
-    background-color: @color10;
+    background-color: @color9;
 }
 #custom-power {
     font-size: 20px;
@@ -408,13 +408,13 @@ button:hover {
 }
 
 #custom-appname {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 25px 12px 12px 25px;
 }
 
 #bluetooth:hover {
-    background-color: @color10;
+    background-color: @color9;
 }
 #bluetooth {
     font-size: 15px;
@@ -422,12 +422,12 @@ button:hover {
     border-radius:10px;
 }
 #custom-visualizer {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
 }
 #custom-spotify {
-    color: @color10;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 12px 25px 25px 12px;
 }
