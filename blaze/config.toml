@@ -1,0 +1,88 @@
+[prompt]
+string = " ❯ "
+foreground = "green"       # Matches success color
+error_foreground = "red"    # Matches error color
+
+[date]
+format = "%F"
+
+[time]
+format = "%T"
+
+[git_status]
+clean = ""
+
+[[module]]
+name = "directory"
+inner_prefix = "  "
+inner_suffix = " "
+foreground = "blue"        # Pywal Blue
+
+[[module]]
+name = "git_branch"
+inner_prefix = " "
+inner_suffix = " "
+foreground = "green"       # Pywal Green
+
+[[module]]
+name = "git_commit"
+inner_prefix = " "
+inner_suffix = " "
+foreground = "green"
+
+[[module]]
+name = "git_status"
+inner_suffix = " "
+foreground = "green"
+
+[[module]]
+name = "duration"
+inner_prefix = "󱎫 "
+inner_suffix = " "
+foreground = "yellow"      # Pywal Yellow
+
+[[module]]
+name = "status"
+inner_prefix = "⚠ "
+inner_suffix = " "
+foreground = "red"         # Pywal Red
+
+[connector]
+character = "─"
+foreground = "white"
+
+[[module]]
+name = "date"
+align = "right"
+padding = " "
+foreground = "white"
+
+[[module]]
+name = "time"
+align = "right_prompt"
+inner_suffix = " "
+foreground = "white"
+
+[[module]]
+name = "fixed"
+content = "╭─ "
+position = 0
+foreground = "white"
+
+[[module]]
+name = "fixed"
+content = "╰─"
+level = 2
+foreground = "white"
+
+[[module]]
+name = "fixed"
+content = "─╮"
+align = "right"
+foreground = "white"
+
+[[module]]
+name = "fixed"
+content = "─╯"
+align = "right_prompt"
+foreground = "white"

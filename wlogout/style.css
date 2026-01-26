@@ -1,0 +1,93 @@
+@import url("/home/lokendra/.cache/wal/colors-waybar.css");
+* {
+    background-image: none;
+    transition: 300ms;
+    box-shadow: none;
+}
+
+window {
+    background-color:rgba(0,0,0,0); 
+}
+
+button {
+    color: #FFFFFF;
+    background-color: rgba(0,0,0,0.2);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30%;
+    border: none;
+	  border-radius: 0px;
+	  outline-style: none;
+}
+
+/* options */ 
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+    margin : 60px -45px 0px 600px;
+    border-radius: 10px 0px 0px 0px;
+}
+
+#reboot {
+     background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));  
+     margin : 0px 500px 60px 45px;
+     border-radius: 0px 0px 10px 0px;
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+    margin : 0px -45px 60px 600px;
+    border-radius: 0px 0px 0px 10px;
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+    margin : 60px 500px 0px 45px;
+    border-radius: 0px 10px 0px 0px;
+}
+#hibernate {
+    background-color:rgba(0,0,0,0);
+    border-radius: 0px 0px 0px 0px;
+}
+#suspend {
+    background-color:rgba(0,0,0,0);
+    border-radius: 0px 0px 5px 0px;
+}
+
+/* options on hover */ 
+button:hover {
+    box-shadow:0px 0px 14px 4px rgba(0,0,0,0.7);
+    background-color: @color1;
+    background-size: 45%;
+}
+
+button:hover#lock {
+    margin : 45px -45px 0px 530px;
+    border-radius: 10px 10px 0px 10px;
+}
+
+button:hover#reboot {
+    margin : 0px 443px 45px 45px;
+    border-radius: 0px 10px 10px 10px;
+}
+
+button:hover#logout {
+    margin : 0px -45px 45px 523px;
+    border-radius: 10px 0px 10px 10px;
+}
+
+button:hover#shutdown {
+     margin : 45px 430px 0px 45px;
+     border-radius: 10px 10px 10px 0px;
+}
+
+button:hover#suspend {
+    box-shadow:0px 0px 0px 0px  rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+    background-size: 0%;
+}
+
+button:hover#hibernate {
+    box-shadow:0px 0px 0px 0px  rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+    background-size: 0%;
+}
