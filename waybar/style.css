@@ -1,3 +1,6 @@
+@define-color default1 rgba(60, 60, 60, 0.5);
+@define-color default2 rgba(0, 0, 0, 0.3);
+
 @import url("/home/lokendra/.cache/wal/colors-waybar.css"); 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -53,12 +56,12 @@ button:hover {
 /* you can set a style on hover for any module like this */
 
 #workspaces button {
-      color:rgba(0,0,0,1);
+      color:rgba(255,255,255,0.1);
       padding: 2px;
       background-color:rgba(230,230,230,0);
       border-radius:0px;
       margin:1px;
-      transition: all 0.1s ease-in-out;
+      transition: all 1s ease;
 }
 
 #workspaces button:hover {
@@ -66,7 +69,7 @@ button:hover {
 
 #workspaces button.active {
     box-shadow: inset 0 -3 0px @color5;
-    color: @color3;
+    color: @color10;
     border-radius:0px; 
     transition: all 0.1s ease-in-out;
 }
@@ -106,13 +109,19 @@ button:hover {
 #custom-spotify,
 #power-profiles-daemon,
 #mpd {
+   background: linear-gradient(
+        to bottom,
+        @default1 0%,
+        @default2 100%
+    );
     box-shadow: inset -1 -1 0 0px @color5;
+    transition: all 0.2s ease;
 }
 
 #window,
 #workspaces {
-   color: @color2;
-   background-color: rgba(45,50,45,1);
+   color: @color9;
+   background-color: rgba(0,0,0,0.1);
    border-radius: 25px;
    padding: 0px 10px 2px 10px;
 }
@@ -132,14 +141,14 @@ button:hover {
 }
 
 #clock {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 25px 12px 12px 25px;
 }
 
 #custom-battery {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
 }
 
@@ -195,8 +204,8 @@ button:hover {
     background-color: rgba(40,50,30,0.9);
 }
 #cpu {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
 }
 
@@ -210,8 +219,8 @@ button:hover {
 }
 
 #custom-backlight {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 12px 25px 25px 12px;
 }
 
@@ -225,8 +234,8 @@ button:hover {
 
 #network {
     border-radius: 8px 8px 8px 8px;
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
 }
 
 #network.disconnected {
@@ -234,18 +243,18 @@ button:hover {
 }
 
 #network:hover {
-    background-color: rgba(40,50,30,0.9);
+    background-color: rgba(40,50,30,1);
 }
 
 #custom-ethname {
     border-radius: 8px 8px 8px 8px;
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
 }
 
 #custom-volume{
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius:8px 8px 8px 8px;
 }
 
@@ -266,7 +275,7 @@ button:hover {
 }
 
 #wireplumber {
-    background-color: rgba(106,45,124,0.4);
+    background-color: rgba(106,45,124,0.1);
     border-radius:10px;
     color: #000000;
 }
@@ -276,7 +285,7 @@ button:hover {
 }
 
 #custom-media {
-    background-color: rgba(106,45,124,0.6);
+    background-color: rgba(106,45,124,0.1);
     color: #000000;
     min-width: 50px;
     border-radius: 10px;
@@ -358,11 +367,11 @@ button:hover {
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 #scratchpad.empty {
@@ -391,7 +400,7 @@ button:hover {
 }
 
 #custom-power:hover {
-    background-color: @color2;
+    background-color: @color9;
 }
 #custom-power {
     font-size: 20px;
@@ -399,13 +408,13 @@ button:hover {
 }
 
 #custom-appname {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 25px 12px 12px 25px;
 }
 
 #bluetooth:hover {
-    background-color: @color2;
+    background-color: @color9;
 }
 #bluetooth {
     font-size: 15px;
@@ -413,12 +422,12 @@ button:hover {
     border-radius:10px;
 }
 #custom-visualizer {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
 }
 #custom-spotify {
-    color: @color2;
-    background-color: rgba(45,50,45,1);
+    color: @color9;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 12px 25px 25px 12px;
 }

@@ -21,52 +21,63 @@
        }
     },
     "display": {
-        "separator": " "
+        "separator": " ",
     },
     "modules": [
-	"break",
+        "break",
+        {
+            "type": "custom",
+            "format": "┌─────────────────────────────────┐"
+        },
 	"break",
 	{
             "type": "title",
-            "keyWidth": 10
+            "key":"  󰳟 "
         },
         "break",
         {
             "type": "os",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "kernel",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "packages",
             "format": "{} (pacman)",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "shell",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "terminal",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "wm",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "uptime",
-            "key": " ",
+            "key": "     ",
         },
         {
             "type": "media",
-            "key": "󰝚 ",
+            "key": "    󰝚 ",
         },
         "break",
-        "colors",
-        "break",
-        "break",
+        {
+            "type":"colors",
+            "paddingLeft": 4
+        },
+       "break",
+       "break",
+       {
+            "type": "custom",
+            "format": "└─────────────────────────────────┘"
+       }
     ]
 }

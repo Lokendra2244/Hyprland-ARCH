@@ -20,10 +20,7 @@ config_file=""
 
 if [[ "$desktop" == *"hyprland"* ]]; then
     # Try the specific config first, fall back to default if missing
-    if [ -f "$HOME/.config/waybar/config-hypr.jsonc" ]; then
-        config_file="$HOME/.config/waybar/config-hypr.jsonc"
-    fi
-
+        config_file="$HOME/.config/waybar/config.jsonc"
 elif [[ "$desktop" == *"niri"* ]]; then
     config_file="$HOME/.config/waybar/niri-config.jsonc"
 fi
