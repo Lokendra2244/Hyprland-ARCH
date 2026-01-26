@@ -57,11 +57,11 @@ button:hover {
 
 #workspaces button {
       color:rgba(255,255,255,0.1);
-      padding: 2px;
       background-color:rgba(230,230,230,0);
       border-radius:0px;
-      margin:1px 8px 2px 8px; 
       transition: all 1s ease;
+      margin:0px 2px 0px 1px;
+      padding: 0px 7px 0px 8px ;
 }
 
 #workspaces button:hover {
@@ -71,7 +71,7 @@ button:hover {
     box-shadow: inset 0 -3 0px @color5;
     color: @color10;
     border-radius:0px; 
-    transition: all 0.1s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 #workspaces button.inactive {
@@ -101,7 +101,7 @@ button:hover {
 #mode,
 #custom-volume,
 #custom-backlight,
-#custom-battery,
+#custom-memory,
 #custom-visualizer,
 #custom-appname,
 #idle_inhibitor,
@@ -146,10 +146,17 @@ button:hover {
     border-radius: 25px 12px 12px 25px;
 }
 
-#custom-battery {
+#custom-memory {
     color: @color9;
     background-color: rgba(0,0,0,0.1);
     border-radius: 8px 8px 8px 8px;
+}
+#custom-memory.warning {
+    color: #ebcb8b;
+ }
+
+#custom-memory.critical { 
+    color: #bf616a; 
 }
 
 #custom-battery.critical {
