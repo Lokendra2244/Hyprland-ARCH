@@ -1,8 +1,8 @@
 // -*- mode: jsonc -*-
-{    "margin":  "10 9 0 9",      
+{    "margin":  "5 3 1 3",      
      "layer": "top", // Waybar at top layer
-    //"position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+  //  "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 25, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 7, // Gaps between modules (4px)
     // Choose the order of the modules
@@ -44,19 +44,12 @@
         "all-outputs": false, // IMPORTANT: Keep false so bars are separate
         "warp-on-scroll": false,
      
-     // Define which workspaces live on which monitor
         "persistent-workspaces": {
-            "DP-1": [1, 2, 3, 4],        // Left Monitor
-            "HDMI-A-3": [11, 12, 13, 14] // Right Monitor
+            "DP-1": [1, 2, 3, 4],
         },
-     
-        "format": "{icon}",
-        "format-icons": {
-            "1": "1", "2": "2", "3": "3", "4": "4",
-         // The Visual Trick: Make 11-14 look like 1-4
-            "11": "1", "12": "2", "13": "3", "14": "4",
-            "urgent": ""
-        }
+       "format": "{icon}",
+       "format-icons": {
+    },
 }, 
     "keyboard-state": {
         "numlock": true,
@@ -119,7 +112,7 @@
          }
     },
     "clock": {
-        "format": " [ 󰅑 {:%I:%M %p} ] ",
+        "format": " [󰅑 {:%I:%M %p}] ",
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": " [ {:%Y-%m-%d} ] ",
@@ -127,7 +120,7 @@
     },
     "cpu": {
         "on-click":  "ghostty -e  htop",
-        "format": " [ {usage}%  ] ",
+        "format": " [{usage}%  ] ",
         "interval": "0.1",
         "tooltip": false
     },
@@ -150,7 +143,7 @@
           "return-type": "json",
           "interval": 1,
           "signal": 1,
-          "on-click": "~/.config/waybar/scripts/hyprshade.sh",
+          "on-click": "~/.config/waybar/scripts/sunset.sh",
           "on-scroll-up": "~/.config/waybar/scripts/backlight_control.sh +5%",
           "on-scroll-down": "~/.config/waybar/scripts/backlight_control.sh 5%-"
        },
@@ -196,11 +189,11 @@
     },
     // 1. Built-in Network (Handles Wi-Fi, Hides for Ethernet)
     "network": {
-        "format-wifi": " [ {signalStrength}%   {essid}] ",
+        "format-wifi": " [{signalStrength}%  ] ",
         "max-length" : 15, 
         "format-ethernet": "",  // <--- Empty string hides this module when wired
-        "format-disconnected": " [ Disconnected ⚠ ] ",
-        "format-linked": " [ (No IP)  ] ",
+        "format-disconnected": " [Disconnected ⚠] ",
+        "format-linked": " [(No IP)  ] ",
         "tooltip-format": " {} ",
         "on-click-right": "ghostty -e nmtui",
         "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
@@ -212,7 +205,7 @@
         "return-type": "json",
         "interval": 5,
         "max-length":15,
-        "format": " [ {}] ",
+        "format": " [] ",
         "format-disconnected": "", 
         "on-click-right": "ghostty -e nmtui",
         "tooltip": false,
@@ -246,7 +239,7 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
      },
     "custom/spotify": {
-       "format": "   {} ",
+       "format": "  {} ",
        "exec": "~/.config/waybar/scripts/status.sh",
        "interval": 1,
        "max-length":35,
@@ -274,9 +267,10 @@
         "on-click": "/home/lokendra/rofi-bluetooth/rofi-bluetooth"
    },
    "custom/visualizer": {
-       "exec": "/home/lokendra/.config/waybar/scripts/visualize.sh",
-       "return-type": "json",
-       "format": " {} ", 
-       "interval": 0
+    "exec": "cava -p ~/.config/cava/waybar.conf | sed -u 's/;//g;s/0/▁/g;s/1/▂/g;s/2/▃/g;s/3/▄/g;s/4/▅/g;s/5/▆/g;s/6/▇/g;s/7/█/g;'",
+    "format": "{}",
+    "tooltip": false,
+    "layer": "below",
+    "max-length": "70"
     }
 }

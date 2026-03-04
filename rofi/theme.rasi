@@ -13,7 +13,7 @@
     green:            rgba ( 134, 175, 128, 100 % );
     background-color: transparent;
     lightred:         rgba ( 204, 85, 51, 100 % );
-    font:             "FiraCode Nerd Font 16";
+    font:             "JetBrainsMono Nerd Font";
     magenta:          BurlyWood;
     tlightblack:      rgba ( 85, 68, 68, 80 % );
     dark:             rgba ( 28, 28, 28, 100 % );
@@ -73,7 +73,7 @@ inputbar {
     font:             "Source Code Pro 18";
     margin: 3px;
     border-radius: 10px;
-    border: 2px;
+    border: 1px;
     border-color: @urgent-background;   
 }
 entry {
@@ -98,7 +98,7 @@ listview {
     lines:            12;
     border-radius:    10px ;
     spacing: 8px ;
-    border: 2px;
+    border: 1px;
     border-color: @active-background;
 }
 element normal.normal {
