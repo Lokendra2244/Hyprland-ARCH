@@ -5,7 +5,7 @@
 
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-family: "otf font awesome", "JetBrainsMono Nerd Font";
   font-size: 13px;
   font-weight: bold;
 }
@@ -57,37 +57,34 @@ button:hover {
 /* you can set a style on hover for any module like this */
 
 #workspaces button {
-<<<<<<< HEAD
+
   color: rgba(255, 255, 255, 0.1);
   background-color: rgba(230, 230, 230, 0);
   border-radius: 0px;
   transition: all 1s ease;
   margin: 0px 0px 0px 0px;
   padding: 0px 8px 0px 7px;
-=======
-      color:rgba(255,255,255,0.1);
-      padding: 2px;
-      background-color:rgba(230,230,230,0);
-      border-radius:0px;
-      margin:1px 8px 2px 8px; 
-      transition: all 1s ease;
->>>>>>> parent of 7a5171c ()
+  color: rgba(255, 255, 255, 0.1);
+  padding: 2px;
+  background-color: rgba(230, 230, 230, 0);
+  border-radius: 0px;
+  margin: 1px 8px 2px 8px;
+  transition: all 1s ease;
+
 }
 
 #workspaces button:hover {}
 
 #workspaces button.active {
-<<<<<<< HEAD
   box-shadow: inset 0 -3 0px @color5;
   color: @color10;
   border-radius: 0px;
   transition: all 0.5s ease-in-out;
-=======
-    box-shadow: inset 0 -3 0px @color5;
-    color: @color10;
-    border-radius:0px; 
-    transition: all 0.1s ease-in-out;
->>>>>>> parent of 7a5171c ()
+  box-shadow: inset 0 -3 0px @color5;
+  color: @color10;
+  border-radius: 0px;
+  transition: all 0.1s ease-in-out;
+
 }
 
 #workspaces button.inactive {}
@@ -118,6 +115,7 @@ button:hover {
 #custom-battery,
 #custom-visualizer,
 #custom-appname,
+#custom-memory,
 #idle_inhibitor,
 #scratchpad,
 #custom-spotify,
@@ -158,7 +156,6 @@ button:hover {
   border-radius: 25px 12px 12px 25px;
 }
 
-<<<<<<< HEAD
 #custom-memory {
   color: @color9;
   background-color: rgba(0, 0, 0, 0.1);
@@ -172,13 +169,12 @@ button:hover {
 #custom-memory.critical {
   color: #bf616a;
 }
-=======
+
 #custom-battery {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 8px 8px 8px 8px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 8px 8px;
 }
->>>>>>> parent of 7a5171c ()
 
 #custom-battery.critical {
   color: #bf616a;

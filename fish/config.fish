@@ -19,3 +19,4 @@ fzf_configure_bindings --history=\cr --directory=\ct --git_log=\cl --git_status=
 
 #make fd see dotfiles
 set -g fzf_fd_opts --hidden 
+set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
