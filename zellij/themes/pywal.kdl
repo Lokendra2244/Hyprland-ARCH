@@ -1,0 +1,15 @@
+themes {
+    pywal {
+        fg 152 144 155
+        bg 28 13 31
+        black 28 13 31
+        red 99 102 94
+        green 75 62 108
+        yellow 105 72 123
+        blue 120 120 125
+        magenta 111 121 160
+        cyan 105 125 168
+        white 152 144 155
+        orange 132 137 126
+    }
+}

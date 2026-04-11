@@ -275,6 +275,8 @@ load_plugins {
 web_client {
     font "monospace"
 }
+
+theme "pywal"
  
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
@@ -315,7 +317,7 @@ web_client {
 // The folder in which Zellij will look for themes
 // (Requires restart)
 // 
-// theme_dir "/tmp"
+theme_dir "/home/lokendra/.config/zellij/themes"
  
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could

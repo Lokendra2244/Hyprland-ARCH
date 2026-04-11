@@ -2,6 +2,7 @@
 {
   "margin": "5 3 1 3",
   "layer": "top", // Waybar at top layer
+  "reload_style_on_change": true,
   //  "position": "bottom", // Waybar position (top|bottom|left|right)
   "height": 25, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
@@ -50,7 +51,7 @@
         2,
         3,
         4
-      ],
+      ]
     },
     "format": "{icon}",
     "format-icons": {},
@@ -274,11 +275,7 @@
     "exec": "~/.config/waybar/scripts/status.sh",
     "interval": 1,
     "max-length": 35,
-    "on-click": "playerctl --player=spotify play-pause",
-    "on-double-click": "playerctl --player=spotify next",
-    "on-click-right": "playerctl --player=spotify previous",
-    "on-scroll-up": "/home/lokendra/.config/waybar/scripts/ncvol.sh up",
-    "on-scroll-down": "/home/lokendra/.config/waybar/scripts/ncvol.sh down"
+    "on-click": "~/.config/waybar/scripts/hyprwave_toggle.sh & hyprwave-toggle set-theme pywalwave"
   },
   "custom/power": {
     "format": " ⏻ ",
