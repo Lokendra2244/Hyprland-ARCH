@@ -463,3 +463,7 @@ keymap = [
   # Filtering
   { on = "f", run = "filter", desc = "Filter help items" },
 ]
+[[mgr.prepend_keymap]]
+on = ["M","s"]
+run = "plugin sshfs -- menu"
+desc = "Open sshfs options"

@@ -1,14 +1,24 @@
 #!/bin/bash
 
-# Buses identified from your ddcutil output
-BUSES=("5" "9")
+# 1. Unload the backlight driver so it releases any stale state
+sudo rmmod ddcci_backlight 2>/dev/null || true
 
-for bus in "${BUSES[@]}"; do
-    # 1. CLEANUP: Try to remove the device first.
-    # This fixes the "Resource Busy" error on Bus 9.
-    # We hide errors (> /dev/null) because Bus 5 might not be attached yet (the "No such file" error you saw).
-    echo 0x37 | sudo tee "/sys/bus/i2c/devices/i2c-$bus/delete_device" > /dev/null 2>&1 || true
+# Ensure the main bus driver is awake
+sudo modprobe ddcci 2>/dev/null || true
 
-    # 2. ATTACH: Force the driver to attach
-    echo "ddcci 0x37" | sudo tee "/sys/bus/i2c/devices/i2c-$bus/new_device" > /dev/null 2>&1
+# 2. Find the active monitor bus dynamically
+BUSES=$(sudo ddcutil detect | awk '/I2C bus:/ {print $NF}' | tr -d '/dev/i2c-')
+
+for bus in $BUSES; do
+  # 3. Clear the bus just in case
+  echo 0x37 | sudo tee "/sys/bus/i2c/devices/i2c-$bus/delete_device" >/dev/null 2>&1 || true
+
+  # 4. Attach the monitor (Errors left visible on purpose for future debugging)
+  echo "ddcci 0x37" | sudo tee "/sys/bus/i2c/devices/i2c-$bus/new_device"
 done
+
+# 5. The critical pause: give the I2C bus time to actually register the device
+sleep 2
+
+# 6. Reload the backlight driver so it scans the newly attached bus
+sudo modprobe ddcci_backlight

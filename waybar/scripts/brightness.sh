@@ -2,22 +2,24 @@
 # ── brightness.sh ─────────────────────────────────────────
 
 # 1. FIND A VALID MONITOR
-# We look for the first available 'ddcci' device.
-# If none found, fallback to default (usually laptop screen or empty).
-device=$(ls /sys/class/backlight/ | grep ddcci | head -n 1)
+device=$(ls -1 /sys/class/backlight/ 2>/dev/null | grep '^ddcci' | head -n 1)
 
 if [ -z "$device" ]; then
-  # Fallback if no DDCCI monitor is found (prevents crash)
-  current=$(brightnessctl get)
-  max=$(brightnessctl max)
+  # Fallback if no DDCCI monitor is found
+  current=$(brightnessctl get 2>/dev/null || echo 0)
+  max=$(brightnessctl max 2>/dev/null || echo 100)
 else
-  # Use the specific DDCCI device found (e.g., ddcci5)
-  current=$(brightnessctl -d "$device" get)
-  max=$(brightnessctl -d "$device" max)
+  # DIRECT READ
+  current=$(cat "/sys/class/backlight/$device/actual_brightness" 2>/dev/null || cat "/sys/class/backlight/$device/brightness" 2>/dev/null || echo 0)
+  max=$(cat "/sys/class/backlight/$device/max_brightness" 2>/dev/null || echo 100)
 fi
 
+# Failsafe: Ensure variables are never empty so bash math doesn't crash
+current=${current:-0}
+max=${max:-100}
+
 # 2. CALCULATE PERCENTAGE
-# Avoid division by zero if max is 0
+# Avoid division by zero
 if [ "$max" -eq 0 ]; then
   percent=0
 else
@@ -39,7 +41,7 @@ bar_empty="░░░░░░░░░░"
 
 if [ "$percent" -ge 100 ]; then
   ascii_bar="|$bar_full|"
-elif [ "$percent" -eq 0 ]; then
+elif [ "$percent" -le 0 ]; then
   ascii_bar="|$bar_empty|"
 else
   filled=$((percent / 10))
@@ -57,8 +59,7 @@ else
 fi
 
 # 6. TOOLTIP
-# Optional: Show which device is being read in the tooltip
-tooltip="Brightness: $percent%\nSource: $device"
+tooltip="Brightness: $percent%\nSource: ${device:-fallback}"
 
 # 7. OUTPUT
 echo "{\"text\":\" [$icon$ascii_bar] \",\"tooltip\":\"$tooltip\",\"class\":\"$css_class\"}"
