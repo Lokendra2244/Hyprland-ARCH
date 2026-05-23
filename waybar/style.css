@@ -1,5 +1,5 @@
-@define-color default1 rgba(60, 60, 60, 0.5);
-@define-color default2 rgba(0, 0, 0, 0.3);
+@define-color default1 rgba(255, 255, 255, 0.1);
+@define-color default2 rgba(0, 0, 0, 0);
 
 @import url("/home/lokendra/.cache/wal/colors-waybar.css");
 
@@ -76,7 +76,7 @@ button:hover {
 #workspaces button:hover {}
 
 #workspaces button.active {
-  box-shadow: inset 0 -3 0px @color5;
+  box-shadow: inset 0 0px @color5;
   color: @color10;
   border-radius: 0px;
   transition: all 0.5s ease-in-out;
@@ -121,10 +121,20 @@ button:hover {
 #custom-spotify,
 #power-profiles-daemon,
 #mpd {
-  background: linear-gradient(to bottom,
-      @default1 0%,
-      @default2 100%);
-  box-shadow: inset -1 -1 0 0px @color5;
+  background:
+    linear-gradient(to bottom,
+      @default1 1%,
+      @default2 15%),
+    linear-gradient(to right,
+      @default1 1%,
+      @default2 3%),
+    linear-gradient(to top,
+      @default1 1%,
+      @default2 15%),
+    linear-gradient(to left,
+      @default1 1%,
+      @default2 3%);
+  box-shadow: inset 0 0px @color5;
   transition: all 0.2s ease;
 }
 
@@ -132,7 +142,7 @@ button:hover {
 #workspaces {
   color: @color9;
   background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 25px;
+  border-radius: 8px;
   padding: 0px 20px 2px 20px;
 }
 
@@ -153,7 +163,7 @@ button:hover {
 #clock {
   color: @color9;
   background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 25px 12px 12px 25px;
+  border-radius: 8px 8px 8px 8px;
 }
 
 #custom-memory {
@@ -246,7 +256,7 @@ button:hover {
 #custom-backlight {
   color: @color9;
   background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 12px 25px 25px 12px;
+  border-radius: 8px 8px 8px 8px;
 }
 
 #custom-backlight.low {
@@ -436,7 +446,7 @@ button:hover {
 #custom-appname {
   color: @color9;
   background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 25px 12px 12px 25px;
+  border-radius: 8px 8px 8px 8px;
 }
 
 #bluetooth:hover {
@@ -460,5 +470,5 @@ button:hover {
 #custom-spotify {
   color: @color9;
   background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 12px 25px 25px 12px;
+  border-radius: 8px 8px 8px 8px;
 }

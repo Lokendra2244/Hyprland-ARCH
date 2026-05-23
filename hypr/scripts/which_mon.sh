@@ -18,11 +18,14 @@ else
     final_ws=$target_ws
 fi
 
-# 4. SAFETY CHECK:
-# If we are already on the target workspace, do nothing.
+# 4. Safety check: already on target workspace, do nothing
 if [ "$action" == "workspace" ] && [ "$current_ws" -eq "$final_ws" ]; then
     exit 0
 fi
 
-# 5. Execute
-hyprctl dispatch $action $final_ws
+# 5. Execute — new Lua dispatch syntax for 0.55+
+if [ "$action" == "workspace" ]; then
+    hyprctl dispatch "hl.dsp.focus({workspace=$final_ws})"
+elif [ "$action" == "movetoworkspace" ]; then
+    hyprctl dispatch "hl.dsp.window.move({workspace=$final_ws})"
+fi

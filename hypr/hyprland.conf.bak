@@ -66,10 +66,10 @@ exec-once = sunshine
 ### ENVIRONMENT VARIABLES ###
 #############################
 env= TERM,ghostty
-env = HYPRCURSOR_THEME,Moga-Neon-Butter # Replace with your desired theme name
-env = HYPRCURSOR_SIZE,24
-env = XCURSOR_THEME,Moga-Neon-Butter
-env = XCURSOR_SIZE,24
+env = HYPRCURSOR_THEME,Nordic-cursors # Replace with your desired theme name
+env = HYPRCURSOR_SIZE,28
+env = XCURSOR_THEME,Nordic-cursors
+env = XCURSOR_SIZE,28
 # See https://wiki.hyprland.org/Configuring/Environment-variables/
 
 
@@ -103,8 +103,8 @@ permission = /usr/bin/wayvnc, screencopy, allow
 
 # https://wiki.hyprland.org/Configuring/Variables/#general
 general {
-    gaps_in = 1
-    gaps_out = 3
+    gaps_in = 0
+    gaps_out = 0
 
     border_size = 1
     
@@ -112,7 +112,8 @@ general {
     col.active_border = $color1 
     col.inactive_border = $color8
     # Set to true enable resizing windows by clicking and dragging on borders and gaps
-    resize_on_border = true
+    resize_on_border = false
+    extend_border_grab_area = 0
 
     # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
     allow_tearing = false
@@ -188,10 +189,7 @@ animations {
 # windowrule = rounding 0, floating:0, onworkspace:f[1]
 
 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-dwindle {
-    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true # You probably want this
-}
+
 
 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
 master {
@@ -207,19 +205,22 @@ misc {
 # See https://wiki.hyprland.org/Configuring/Scrolling-Layout/
 scrolling {
     # If there is only one column/window on the workspace, it spans the whole screen
-    fullscreen_on_one_column = true
+    fullscreen_on_one_column = false
 
     # The default width of a new column (0.5 = 50% of the screen)
     column_width = 0.6
 
     # When a column is focused, how to bring it into view (0 = center, 1 = fit)
-    focus_fit_method = 0
+    focus_fit_method = 1
 
     # Automatically scroll the tape to bring the focused window into view
     follow_focus = true
 
     # Preconfigured widths for resizing columns (1/3, 1/2, 2/3, full width)
     explicit_column_widths = 0.1,0.2,0.3,0.4, 0.5, 0.6,0.7,0.8,0.9 1.0
+    
+    follow_min_visible = 0.5
+
 }
 
 #############
@@ -272,7 +273,6 @@ bind = $mainMod, H, exec, killall waypaper || waypaper
 bind = $mainMod, V, exec,kitty --class clipse -e clipse
 bind = $mainMod,SPACE,exec,$menu -show drun -show-icons|| killall rofi
 bind = $mainMod, P, pseudo, # dwindle
-bind = $mainMod, T, togglesplit, # dwindle
 bind = $mainMod, F, exec, hyprctl dispatch fullscreen
 bind = $mainMod , l, exec,wlogout
 bind = $mainMod, PRINT, exec, hyprshot -m window --freeze
@@ -336,7 +336,7 @@ layerrule {
   name = bar-styling
   match:namespace = waybar
   blur = on
-  ignore_alpha = 0.3
+  ignore_alpha = 0
 }
 ###########
 ## BINDS ##
@@ -386,16 +386,10 @@ workspace = 2, monitor:DP-1
 workspace = 3, monitor:DP-1
 workspace = 4, monitor:DP-1
 
-workspace = 11, monitor:HEADLESS-2
-workspace = 12, monitor:HEADLESS-2
-workspace = 13, monitor:HEADLESS-2
-workspace = 14, monitor:HEADLESS-2
 
-# Toggle focus between monitors
-bind = $mainMod, Tab, focusmonitor, +1
-
-# Move window to the next monitor (cycles if you had 3, toggles if you have 2)
-bind = $mainMod SHIFT, Tab, movewindow, mon:+1
+# To switch between windows in a floating workspace:
+bind = SUPER, Tab, cyclenext         # Change focus to another window
+bind = SUPER, Tab, bringactivetotop  # Bring it to the top
 
 # -----------------------------------------------------
 # Scrolling Layout Controls

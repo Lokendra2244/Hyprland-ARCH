@@ -7,7 +7,13 @@ sudo rmmod ddcci_backlight 2>/dev/null || true
 sudo modprobe ddcci 2>/dev/null || true
 
 # 2. Find the active monitor bus dynamically
-BUSES=$(sudo ddcutil detect | awk '/I2C bus:/ {print $NF}' | tr -d '/dev/i2c-')
+BUSES=$(sudo ddcutil detect 2>/dev/null | awk '/I2C bus:/ {print $NF}' | tr -d '/dev/i2c-')
+
+# Exit early if no monitors detected (e.g. monitor is powered off)
+if [ -z "$BUSES" ]; then
+    echo "No monitors detected via DDC — is the monitor powered on?"
+    exit 1
+fi
 
 for bus in $BUSES; do
   # 3. Clear the bus just in case

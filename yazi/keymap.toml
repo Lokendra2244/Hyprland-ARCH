@@ -1,6 +1,6 @@
 # A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+# "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [mgr]
 keymap = [
@@ -256,6 +256,11 @@ on = [".", "m"]
 run = "plugin mount"
 desc = "mount device"
 
+[[mgr.prepend_keymap]]
+on = ["M", "s"]
+run = "plugin sshfs -- menu"
+desc = "Open sshfs options"
+
 [tasks]
 keymap = [
   { on = "<Esc>", run = "close", desc = "Close task manager" },
@@ -463,7 +468,3 @@ keymap = [
   # Filtering
   { on = "f", run = "filter", desc = "Filter help items" },
 ]
-[[mgr.prepend_keymap]]
-on = ["M","s"]
-run = "plugin sshfs -- menu"
-desc = "Open sshfs options"

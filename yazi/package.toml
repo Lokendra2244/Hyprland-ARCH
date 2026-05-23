@@ -5,20 +5,20 @@ hash = "57056b9728006881d580ccabe8154a9c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "e07bf41"
-hash = "3996fc74044bc44144b323686f887e1"
+rev = "5d5c480"
+hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "1962818"
-hash = "91937a4a9b779eabc6983e258befdfe9"
+rev = "5d5c480"
+hash = "e3260d0b1feded8c8e3ae3afa1169e30"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
-rev = "7ba17a8"
-hash = "f6927372436c780965035310821a40d9"
+rev = "a8b8903"
+hash = "8c1b36103121a66b37308afaf7124575"
 
 [[flavor.deps]]
 use = "AdithyanA2005/nord"
-rev = "bdf0bd4"
-hash = "816970e00d643d3e8213b430d2148aec"
+rev = "1b1bf78"
+hash = "4dbe11b947f327a0075d16f4a6b55043"
