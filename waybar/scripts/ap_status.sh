@@ -1,13 +1,16 @@
 #!/bin/bash
-
-INTERFACE_WIFI="wlan0"
 SSID="AMBHI-Arch"
 
-# Check if create_ap is running with the specific SSID/interface
-if pgrep -f "create_ap .* $INTERFACE_WIFI .* $SSID" > /dev/null; then
-    # Output for when the AP is ON
-    echo "AP: ON 🚀"
+# 1. If the hotspot is already ON, always show it
+if nmcli connection show --active | grep -qw "$SSID"; then
+  echo " [ AP: ON 🚀 ] "
+  exit 0
+fi
+
+# 2. If the hotspot is OFF, only show the button if Ethernet is plugged in
+if nmcli -t -f TYPE connection show --active | grep -q "ethernet"; then
+  echo " [ AP: OFF 📴 ] "
 else
-    # Output for when the AP is OFF
-    echo "AP: OFF 📴"
+  # We are on Wi-Fi (or offline), hide the useless button completely
+  echo ""
 fi

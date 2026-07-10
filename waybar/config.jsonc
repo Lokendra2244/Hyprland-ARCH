@@ -1,5 +1,7 @@
 // -*- mode: jsonc -*-
-{    "margin":  "10 9 0 9",      
+{    "margin":  "10 1 9 1",      
+"on-sigusr1": "hide",
+"on-sigusr2": "show",
      "layer": "top", // Waybar at top layer
     //"position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
@@ -10,7 +12,8 @@
         //"battery",
         "clock",
         "custom/ethname",
-        "network",
+        "custom/wifiname",
+        "custom/apstatus",
      //   "hyprland/mode",
     //  "hyprland/window",
     //    "sway/scratchpad",
@@ -205,10 +208,24 @@
         "format-wifi": " [ {signalStrength}%   {essid}] ",
         "max-length" : 15, 
         "format-ethernet": "",  // <--- Empty string hides this module when wired
-        "format-disconnected": " [ Disconnected ⚠ ] ",
-        "format-linked": " [ (No IP)  ] ",
+        "format-disconnected": "",
         "tooltip-format": " {} ",
         "on-click-right": "ghostty -e nmtui",
+        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
+    },
+
+// 1. Custom Wi-Fi (Hides when disconnected or when hotspot is hosting)
+    "custom/wifiname": {
+        "exec": "~/.config/waybar/scripts/wifi_name.sh",
+        "interval": 1,
+        "max-length": 15,
+        "on-click-right": "ghostty -e nmtui"
+    },
+
+    // 2. Clean AP Status Indicator
+    "custom/apstatus": {
+        "exec": "~/.config/waybar/scripts/ap_status.sh",
+        "interval": 1,
         "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
     },
 
@@ -216,13 +233,12 @@
     "custom/ethname": {
         "exec": "~/.config/waybar/scripts/wired_name.sh",
         "return-type": "json",
-        "interval": 5,
+        "interval": 1,
         "max-length":15,
         "format": " [ {}] ",
-        "format-disconnected": "", 
+        "format-disconnected": "(disconnected)",
         "on-click-right": "ghostty -e nmtui",
-        "tooltip": false,
-        "on-click": "$HOME/.config/waybar/scripts/hotspot.sh"
+        "tooltip": false
     },
     "pulseaudio": {
          "scroll-step": 1,//%, can be a float

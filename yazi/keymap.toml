@@ -378,7 +378,7 @@ run  = "plugin what-size"
 desc = "Calc size of selection or cwd"
 
 [[mgr.prepend_keymap]]
-on  = "M"
+on  = ["M","m"]
 run = "plugin mount"
 
 [[mgr.prepend_keymap]]
@@ -402,4 +402,9 @@ desc = "Zoom out hovered file"
 on   = [ "g", "C" ]
 run  = "plugin vcs-files"
 desc = "Show Git file changes"
+
+[[mgr.prepend_keymap]]
+on = ["M","s"]
+run = "plugin sshfs -- menu"
+desc = "Open SSHFS options"
 

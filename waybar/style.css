@@ -4,7 +4,7 @@
 @import url("/home/lokendra/.cache/wal/colors-waybar.css"); 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: JetBrainsMono ;
     font-size: 14px;
     font-weight: bold;
 }
@@ -94,6 +94,8 @@ button:hover {
 #disk,
 #backlight,
 #network,
+#custom-apstatus,
+#custom-wifiname,
 #pulseaudio,
 #wireplumber,
 #custom-media,
@@ -232,7 +234,7 @@ button:hover {
     color: #fab387 ;
 }
 
-#network {
+#network, #custom-apstatus,#custom-wifiname {
     border-radius: 8px 8px 8px 8px;
     color: @color9;
     background-color: rgba(0,0,0,0.1);

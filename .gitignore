@@ -37,3 +37,6 @@ youtube-tui/
 heroic/
 PCSX2/
 
+/htop/htop_history
+/obs-studio
+/vlc

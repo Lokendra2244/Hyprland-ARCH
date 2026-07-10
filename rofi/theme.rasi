@@ -13,7 +13,7 @@
     green:            rgba ( 134, 175, 128, 100 % );
     background-color: transparent;
     lightred:         rgba ( 204, 85, 51, 100 % );
-    font:             "FiraCode Nerd Font 10";
+    font:             "FiraCode Nerd Font 16";
     magenta:          BurlyWood;
     tlightblack:      rgba ( 85, 68, 68, 80 % );
     dark:             rgba ( 28, 28, 28, 100 % );
@@ -32,8 +32,8 @@
 }
 
 window {
-    width:            410px;
-    height:           400px;
+    width:            450px;
+    height:           370px;
     text-color:       @foreground;
     transparency:     "real";
     padding:          0px ;
@@ -41,22 +41,26 @@ window {
     orientation:      horizontal;
     anchor:           center;
     y-offset:         90px;
-    background-color: var(transparent);
-    border-radius:    10px ;
+    background-color: transparent;
+    border-radius:    0px ;
     border:           0px ;
     spacing:          0;
+    border-color: @urgent-background;
 }
 mainbox {
     spacing:  0;
+    border:           0px;         
+    border-color:     @urgent-background;
+    border-radius:    10px;
     children: [ "inputbar","message","listview" ];
 }
 message {
     padding:          10;
     background-color: rgba(0,0,0,0.6);
     font:             "Source Code Pro 8";
-    border-radius:    0px  ;
+    border-radius:   0px  ;
     border-color: @selected-active-background;
-    border: 0px 1px 0px;
+    border: 0px 10px 0px;
     text-color:       rgba(255,255,255,0.7);
 }
 textbox {
@@ -67,9 +71,10 @@ inputbar {
     background-color: rgba ( 0, 0, 0, 60 % );
     text-color:       @foreground;
     font:             "Source Code Pro 18";
-    border-color: @selected-active-background;
-    border: 1px 1px 0px;
-    border-radius: 3px 3px 0px 0px;
+    margin: 3px;
+    border-radius: 10px;
+    border: 2px;
+    border-color: @urgent-background;   
 }
 entry {
     text-font:  inherit;
@@ -86,19 +91,18 @@ case-indicator {
     text-color: inherit;
 }
 listview {
-    margin:           0px;
+    margin:           3px;
     padding:          10px ;
     background-color: rgba ( 0, 0, 0, 60 % );
-    dynamic:          false;
-    border-color:     var(foreground);
-    lines:            10;
-    border:           0px 0px 0px ;
-    border-radius:    0px 0px 3px 3px ;
-    border-color: @selected-active-background;
-    border: 0px 1px 1px ;
+    dynamic:          true;
+    lines:            12;
+    border-radius:    10px ;
+    spacing: 8px ;
+    border: 2px;
+    border-color: @active-background;
 }
 element normal.normal {
-    border-radius:    3px ;
+    border-radius:    10px ;
     margin:           0px;
     background-color: rgba(0,0,0,0);
     vertical-align:   0.50;
@@ -106,19 +110,19 @@ element normal.normal {
     text-color:       @foreground;
 }
 element alternate.normal {
-    margin:           0px;
+    margin:           10px;
     background-color: rgba(0,0,0,0.6);
     vertical-align:   0.50;
-    border-radius:    3px ;
+    border-radius:    10px ;
     font:             inherit;
     text-color:       @foreground;
 }
 element-icon {
     margin:           5;
-    size:             30;
+    size:             20;
 }
 element selected.normal {
-    border-radius:    3px ;
+    border-radius:    10px ;
     background-color: @selected-active-background;
 }
 element-text {
@@ -126,11 +130,6 @@ element-text {
     size:             50;
     text-color:       rgba(255,255,255,0.7);
 }
-vertb {
-    expand:   false;
-    children: [ "mode-switcher"];
-}
-
 error-message {
     padding:          1.0000em ;
     background-color: Red;
