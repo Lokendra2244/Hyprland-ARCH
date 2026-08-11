@@ -14,8 +14,6 @@ application/x-extension-xht=zen.desktop
 # Directories
 inode/directory=com.mitchellh.ghostty.desktop
 
-# PDF
-application/pdf=zen.desktop
 
 # Images
 image/jpeg=zen.desktop
