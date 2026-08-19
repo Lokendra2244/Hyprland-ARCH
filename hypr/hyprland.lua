@@ -26,6 +26,9 @@ require("conf.autostart")
 -- 5. Look & feel: general, decoration, animations, misc, layouts
 require("conf.look_and_feel")
 
+-- 5b. HyprGlass — liquid glass effect
+require("conf.look")
+
 -- 6. Input: keyboard, mouse, touchpad, gestures, per-device
 require("conf.input")
 

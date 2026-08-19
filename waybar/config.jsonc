@@ -1,5 +1,7 @@
 // -*- mode: jsonc -*-
 {
+  "on-sigusr1": "hide",
+  "on-sigusr2": "show",
   "margin": "5 3 8 3",
   "layer": "top", // Waybar at top layer
   "reload_style_on_change": true,

@@ -10,6 +10,8 @@ application/xhtml+xml=zen.desktop
 application/x-extension-xhtml=zen.desktop
 application/x-extension-xht=zen.desktop
 inode/directory=com.mitchellh.ghostty.desktop
+x-scheme-handler/discord-831593107883032657=discord-831593107883032657.desktop
+x-scheme-handler/element=io.element.Element.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;userapp-Zen-H5CII3.desktop;

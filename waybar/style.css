@@ -141,7 +141,7 @@ button:hover {
 #window,
 #workspaces {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px;
   padding: 0px 20px 2px 20px;
 }
@@ -162,13 +162,13 @@ button:hover {
 
 #clock {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
 #custom-memory {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
@@ -182,7 +182,7 @@ button:hover {
 
 #custom-battery {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
@@ -240,7 +240,7 @@ button:hover {
 
 #cpu {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
@@ -255,7 +255,7 @@ button:hover {
 
 #custom-backlight {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
@@ -270,7 +270,7 @@ button:hover {
 #network {
   border-radius: 8px 8px 8px 8px;
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 #network.disconnected {
@@ -284,12 +284,12 @@ button:hover {
 #custom-ethname {
   border-radius: 8px 8px 8px 8px;
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 #custom-volume {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
@@ -445,7 +445,7 @@ button:hover {
 
 #custom-appname {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }
 
@@ -462,13 +462,13 @@ button:hover {
 #custom-visualizer {
   font-family: "FiraCode Nerd Font Mono";
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
   padding: 0px 10px;
 }
 
 #custom-spotify {
   color: @color9;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px 8px 8px 8px;
 }

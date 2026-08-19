@@ -1,0 +1,115 @@
+/* ========================================
+   HyprWave - Mystic Portal Pywal Template
+   Dynamic Ethereal Purple/Pink Aesthetic
+   ======================================== */
+
+:root {
+    /* Background Colors - Deep Void */
+    --bg-primary: alpha({background}, 0.75);
+    --bg-secondary: alpha({color0}, 0.75);
+    --bg-album-cover: alpha({color0}, 0.85);
+    --bg-album-secondary: alpha({background}, 0.85);
+    
+    /* Button Colors - Mystic Purple (Prev/Next) */
+    --btn-default: alpha({color5}, 0.85);
+    --btn-default-secondary: alpha({color0}, 0.85);
+    --btn-default-hover: alpha({color13}, 0.92);
+    --btn-default-hover-secondary: alpha({color8}, 0.92);
+    
+    /* Button Colors - Bright Pink Portal (Play/Pause) */
+    --btn-play: alpha({color1}, 0.95);
+    --btn-play-secondary: alpha({color5}, 0.95);
+    --btn-play-hover: alpha({color9}, 0.98);
+    --btn-play-hover-secondary: alpha({color13}, 0.98);
+    --btn-play-active: alpha({color1}, 0.95);
+    --btn-play-active-secondary: alpha({color5}, 0.95);
+    
+    /* Button Colors - Deep Violet (Expand) */
+    --btn-expand: alpha({color4}, 0.95);
+    --btn-expand-secondary: alpha({color5}, 0.95);
+    --btn-expand-hover: alpha({color12}, 0.98);
+    --btn-expand-hover-secondary: alpha({color13}, 0.98);
+    --btn-expand-active: alpha({color4}, 0.95);
+    --btn-expand-active-secondary: alpha({color5}, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: alpha({color8}, 0.25);
+    --progress-fill-start: alpha({color1}, 0.95);
+    --progress-fill-end: alpha({color4}, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: alpha({color1}, 0.98);
+    --handle-hover: alpha({color9}, 1.0);
+    --handle-border: alpha({color1}, 0.5);
+    --handle-shadow: alpha({color1}, 0.6);
+    
+    /* Text Colors - Soft dynamic tones */
+    --text-primary: alpha({foreground}, 0.95);
+    --text-secondary: alpha({color7}, 0.85);
+    --text-tertiary: alpha({color7}, 0.75);
+    --text-muted: alpha({color8}, 0.65);
+    
+    /* Border Colors */
+    --border-primary: alpha({color5}, 0.35);
+    --border-button: alpha({color5}, 0.3);
+    --border-button-hover: alpha({color13}, 0.45);
+    --border-play: alpha({color1}, 0.4);
+    --border-play-hover: alpha({color9}, 0.55);
+    --border-expand: alpha({color4}, 0.4);
+    --border-expand-hover: alpha({color12}, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: alpha({color1}, 0.5);
+    --shadow-play-hover: alpha({color9}, 0.7);
+    --shadow-expand: alpha({color4}, 0.5);
+    --shadow-expand-hover: alpha({color12}, 0.7);
+    --shadow-focus: alpha({color1}, 0.7);
+    
+    /* Spacing & Sizes - RESTORED ROUNDED CORNERS */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - Mystic Portal Glow */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        alpha({color9}, 0.98),
+        alpha({color5}, 0.98),
+        alpha({color4}, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 5px;
+    box-shadow: 0 0 16px alpha({color1}, 0.8),
+                0 0 10px alpha({color4}, 0.6);
+}
+
+/* Racing Typeface */
+.vertical-display-label {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: alpha({color9}, 0.98);
+    letter-spacing: 0px;
+    line-height: 1.2;
+}
+
+/* Ensure the main container obeys the rounded pill radius */
+.main-container {
+    border-radius: var(--border-radius-container);
+    background-color: var(--bg-primary);
+}
+
+/* Ensure circular buttons */
+.control-button {
+    border-radius: var(--border-radius-button);
+}

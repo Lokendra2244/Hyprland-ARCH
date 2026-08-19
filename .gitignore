@@ -87,7 +87,6 @@ user-dirs.dirs
 kdeglobals                  
 user-dirs.locale
 kdenliverc                  
-wal/
 kde.org/                    
 kglobalshortcutsrc          
 kiorc                       
@@ -114,3 +113,10 @@ krunnerrc
 /htop/htop_history
 /heroic
 /wireshark
+/Element
+/discord
+/easyeffects/db
+/ghostty/.~lock.config#
+/gtk-3.0/bookmarks
+/pomodoro
+/pupgui

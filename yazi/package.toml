@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "pirafrank/what-size"
-rev = "179ebf6"
+rev = "c1a8cb6"
 hash = "57056b9728006881d580ccabe8154a9c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "5d5c480"
-hash = "7b625412411be411153886894d9acaf"
+rev = "6f26ae0"
+hash = "f281261ff04ad7ec867c3f802a50835f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "5d5c480"
-hash = "e3260d0b1feded8c8e3ae3afa1169e30"
+rev = "6f26ae0"
+hash = "46cbdc05596a3ecd730b288e28c7079d"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
@@ -20,5 +20,5 @@ hash = "8c1b36103121a66b37308afaf7124575"
 
 [[flavor.deps]]
 use = "AdithyanA2005/nord"
-rev = "1b1bf78"
-hash = "4dbe11b947f327a0075d16f4a6b55043"
+rev = "34970be"
+hash = "6e1d257f00b540acbeb194082ce073c2"

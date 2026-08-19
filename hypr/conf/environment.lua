@@ -19,7 +19,7 @@ hl.env("XCURSOR_SIZE", "28")
 -- ============================================================
 hl.config({
 	ecosystem = {
-		enforce_permissions = 0,
+		enforce_permissions = 1,
 	},
 })
 
@@ -33,13 +33,13 @@ local function allow_screencopy(binary)
 	hl.permission({ binary = binary, type = "screencopy", mode = "allow" })
 end
 
-allow_screencopy("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland")
 allow_screencopy("/usr/bin/grim")
 allow_screencopy("/usr/bin/hyprshot")
 allow_screencopy("/usr/bin/hyprpicker")
 allow_screencopy("/usr/bin/hyprlock")
 allow_screencopy("/usr/(bin|local/bin)/hyprpm")
-allow_screencopy("/usr/bin/sunshine")
 allow_screencopy("/usr/bin/wayvnc")
+allow_screencopy(".*xdg-desktop-portal-hyprland.*")
+allow_screencopy(".*sunshine.*")
 
 hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = "allow" })
