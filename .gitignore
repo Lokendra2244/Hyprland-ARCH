@@ -120,3 +120,5 @@ krunnerrc
 /gtk-3.0/bookmarks
 /pomodoro
 /pupgui
+/gh/config.yml
+/gh/hosts.yml
