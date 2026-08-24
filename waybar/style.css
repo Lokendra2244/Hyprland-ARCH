@@ -1,435 +1,258 @@
-@define-color default1 rgba(60, 60, 60, 0.5);
-@define-color default2 rgba(0, 0, 0, 0.3);
+@define-color default1 rgba(255, 255, 255, 0.1);
+@define-color default2 rgba(0, 0, 0, 0);
 
-@import url("/home/lokendra/.cache/wal/colors-waybar.css"); 
+@import url("/home/lokendra/.cache/wal/colors-waybar.css");
+
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: JetBrainsMono ;
-    font-size: 14px;
-    font-weight: bold;
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family: "otf font awesome", "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  font-weight: bold;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0);
-    border-radius:4px;
-    transition-property: background-color;
-    transition-duration: 4s;
+  background-color: rgba(43, 48, 59, 0);
+  border-radius: 4px;
+  transition-property: background-color;
+  transition-duration: 4s;
 }
 
 window#waybar.hidden {
-    opacity: 0;
+  opacity: 0;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 window#waybar.termite {
-    background-color: #3F3F3F;
+  background-color: #3F3F3F;
 }
 
 window#waybar.chromium {
-    background-color: #000000;
-    border: none;
+  background-color: #000000;
+  border: none;
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0  0px @color3;
-    /* Avoid rounded borders under each button name */
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 0px @color3;
+  /* Avoid rounded borders under each button name */
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    background: inherit;
-    box-shadow: inset 0 0px #ffffff;
+  background: inherit;
+  box-shadow: inset 0 0px #ffffff;
 }
-
 
 /* you can set a style on hover for any module like this */
 
 #workspaces button {
-      color:rgba(255,255,255,0.1);
-      padding: 2px;
-      background-color:rgba(230,230,230,0);
-      border-radius:0px;
-      margin:1px;
-      transition: all 1s ease;
+  color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(230, 230, 230, 0);
+  border-radius: 0px;
+  transition: all 1s ease;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 8px 0px 7px;
+  color: rgba(255, 255, 255, 0.1);
+  padding: 2px;
+  background-color: rgba(230, 230, 230, 0);
+  border-radius: 0px;
+  margin: 1px 8px 2px 8px;
+  transition: all 1s ease;
 }
 
-#workspaces button:hover {
-}
+#workspaces button:hover {}
 
 #workspaces button.active {
-    box-shadow: inset 0 -3 0px @color5;
-    color: @color10;
-    border-radius:0px; 
-    transition: all 0.1s ease-in-out;
+  box-shadow: inset 0 0px @color5;
+  color: @color10;
+  border-radius: 0px;
+  transition: all 0.5s ease-in-out;
+  box-shadow: inset 0 -3 0px @color5;
+  color: @color10;
+  border-radius: 0px;
+  transition: all 0.1s ease-in-out;
 }
 
-#workspaces button.inactive {
-}
+#workspaces button.inactive {}
 
-#workspaces button.urgent {
-}
+#workspaces button.urgent {}
 
-#mode {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
+/* ------------------------------------------------------------
+   Shared background treatment — only for modules actually in
+   modules-left / modules-center / modules-right in your config.jsonc
+   ------------------------------------------------------------ */
 #workspaces,
 #clock,
-#battery,
 #cpu,
 #custom-ethname,
-#memory,
-#disk,
-#backlight,
-#network,
-#custom-apstatus,
 #custom-wifiname,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
+#custom-apstatus,
 #custom-volume,
 #custom-backlight,
 #custom-battery,
 #custom-visualizer,
 #custom-appname,
-#idle_inhibitor,
-#scratchpad,
-#custom-spotify,
-#power-profiles-daemon,
-#mpd {
-   background: linear-gradient(
-        to bottom,
-        @default1 0%,
-        @default2 100%
-    );
-    box-shadow: inset -1 -1 0 0px @color5;
-    transition: all 0.2s ease;
+#custom-spotify {
+  background:
+    linear-gradient(to bottom,
+      @default1 1%,
+      @default2 15%),
+    linear-gradient(to right,
+      @default1 1%,
+      @default2 3%),
+    linear-gradient(to top,
+      @default1 1%,
+      @default2 15%),
+    linear-gradient(to left,
+      @default1 1%,
+      @default2 3%);
+  box-shadow: inset 0 0px @color5;
+  transition: all 0.2s ease;
 }
 
 #window,
 #workspaces {
-   color: @color9;
-   background-color: rgba(0,0,0,0.1);
-   border-radius: 25px;
-   padding: 0px 10px 2px 10px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 0px 20px 2px 20px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+.modules-right>widget:last-child>#workspaces {
+  margin-right: 0;
 }
 
 #clock:hover {
-    background: rgba(40,50,30,0.9);
+  background: rgba(40, 50, 30, 0.9);
 }
 
 #clock {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 25px 12px 12px 25px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
 
 #custom-battery {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 8px 8px 8px 8px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
 
 #custom-battery.critical {
-    color: #bf616a;
+  color: #bf616a;
 }
 
 #custom-battery.warning {
-    color: #fab387;
+  color: #fab387;
 }
 
 #custom-battery.charging {
-    color: #a3be8c; 
+  color: #a3be8c;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-    }
+  to {
+    background-color: #ffffff;
+  }
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #custom-battery.critical:not(.charging) {
-    background-color: @color5;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-#power-profiles-daemon {
-    padding-right: 15px;
-}
-
-#power-profiles-daemon.performance {
-    background-color: #f53c3c;
-}
-
-#power-profiles-daemon.balanced {
-    background-color: #2980b9;
-}
-
-#power-profiles-daemon.power-saver {
-    background-color: #2ecc71;
-}
-
-#label:focus {
-    background-color: #000000;
+  background-color: @color5;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #cpu:hover {
-    background-color: rgba(40,50,30,0.9);
+  background-color: rgba(40, 50, 30, 0.9);
 }
+
 #cpu {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 8px 8px 8px 8px;
-}
-
-#memory {
-    background-color: @color1;
-    border-radius:10px;
-}
-
-#disk {
-    background-color: #964B00;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
 
 #custom-backlight {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 12px 25px 25px 12px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
 
-#custom-backlight.low  {
-    color: #bf616a ;
+#custom-backlight.low {
+  color: #bf616a;
 }
 
-#custom-backlight.medium  {
-    color: #fab387 ;
-}
-
-#network, #custom-apstatus,#custom-wifiname {
-    border-radius: 8px 8px 8px 8px;
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-}
-
-#network.disconnected {
-    background-color: @color3;
-}
-
-#network:hover {
-    background-color: rgba(40,50,30,1);
+#custom-backlight.medium {
+  color: #fab387;
 }
 
 #custom-ethname {
-    border-radius: 8px 8px 8px 8px;
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
+  border-radius: 8px 8px 8px 8px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-#custom-volume{
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius:8px 8px 8px 8px;
+#custom-wifiname {
+  border-radius: 8px 8px 8px 8px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#custom-apstatus {
+  border-radius: 8px 8px 8px 8px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#custom-volume {
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
 
 #custom-volume.muted {
-    color: @color3;
+  color: @color3;
 }
 
 #custom-volume.critical {
-    color: #bf616a;
+  color: #bf616a;
 }
 
 #custom-volume.warning {
-    color: #fab387;
+  color: #fab387;
 }
 
 #custom-volume:hover {
-    background-color: rgba(40,50,30,0.9);
-}
-
-#wireplumber {
-    background-color: rgba(106,45,124,0.1);
-    border-radius:10px;
-    color: #000000;
-}
-
-#wireplumber.muted {
-    background-color: #f53c3c;
-}
-
-#custom-media {
-    background-color: rgba(106,45,124,0.1);
-    color: #000000;
-    min-width: 50px;
-    border-radius: 10px;
-}
-
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
-}
-
-#temperature {
-    background-color: #f0932b;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #2980b9;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-#scratchpad {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-#scratchpad.empty {
-	background-color: transparent;
-}
-
-#privacy {
-    padding: 0;
-}
-
-#privacy-item {
-    padding: 0 5px;
-    color: white;
-}
-
-#privacy-item.screenshare {
-    background-color: #cf5700;
-}
-
-#privacy-item.audio-in {
-    background-color: #1ca000;
-}
-
-#privacy-item.audio-out {
-    background-color: #0069d4;
-}
-
-#custom-power:hover {
-    background-color: @color9;
-}
-#custom-power {
-    font-size: 20px;
-    margin:3px;
+  background-color: rgba(40, 50, 30, 0.9);
 }
 
 #custom-appname {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 25px 12px 12px 25px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
 
-#bluetooth:hover {
-    background-color: @color9;
-}
-#bluetooth {
-    font-size: 15px;
-    background-color: @color1;
-    border-radius:10px;
-}
 #custom-visualizer {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 8px 8px 8px 8px;
+  font-family: "FiraCode Nerd Font Mono";
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
+  padding: 0px 10px;
 }
+
 #custom-spotify {
-    color: @color9;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 12px 25px 25px 12px;
+  color: @color9;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 8px 8px 8px;
 }
