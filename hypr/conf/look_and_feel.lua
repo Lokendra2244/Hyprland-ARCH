@@ -9,42 +9,45 @@
 -- ------------------------------------------------------------
 -- color1 / color8 are defined in conf/colors.lua
 hl.config({
-  general = {
-    gaps_in = 0,
-    gaps_out = 0,
-    border_size = 2,
-    ["col.active_border"] = color1,
-    ["col.inactive_border"] = color8,
-    resize_on_border = false,
-    allow_tearing = false,
-    layout = "scrolling",
-  },
+	general = {
+		gaps_in = 0,
+		gaps_out = 0,
+		border_size = 2,
+		["col.active_border"] = color1,
+		["col.inactive_border"] = color8,
+		resize_on_border = false,
+		allow_tearing = false,
+		layout = "scrolling",
+	},
 })
 
 -- ------------------------------------------------------------
 -- DECORATION
 -- ------------------------------------------------------------
 hl.config({
-  decoration = {
-    rounding = 7,
-    rounding_power = 3,
-    active_opacity = 0.50,
-    inactive_opacity = 0.20,
+	decoration = {
+		rounding = 7,
+		rounding_power = 3,
+		active_opacity = 0.50,
+		inactive_opacity = 0.30,
 
-    shadow = {
-      enabled = true,
-      range = 60,
-      render_power = 2,
-      color = "rgba(000000ff)",
-    },
+		shadow = {
+			enabled = true,
+			range = 60,
+			render_power = 2,
+			color = "rgba(000000ff)",
+		},
 
-    blur = {
-      enabled = true,
-      size = 1,
-      passes = 6,
-      brightness = 0.6,
-    },
-  },
+		blur = {
+			enabled = true,
+			new_optimizations = true,
+			size = 1,
+			passes = 4,
+			brightness = 1,
+			contrast = 1,
+			vibrancy = 3,
+		},
+	},
 })
 
 -- ------------------------------------------------------------
@@ -85,19 +88,19 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 3, bezier = "almo
 -- MISC
 -- ------------------------------------------------------------
 hl.config({
-  misc = {
-    force_default_wallpaper = 0,
-    disable_hyprland_logo = true,
-  },
+	misc = {
+		force_default_wallpaper = 0,
+		disable_hyprland_logo = true,
+	},
 })
 
 -- ------------------------------------------------------------
 -- MASTER LAYOUT (kept even though active layout is scrolling)
 -- ------------------------------------------------------------
 hl.config({
-  master = {
-    new_status = "master",
-  },
+	master = {
+		new_status = "master",
+	},
 })
 
 -- ------------------------------------------------------------
@@ -105,11 +108,30 @@ hl.config({
 -- See https://wiki.hypr.land/Configuring/Scrolling-Layout/
 -- ------------------------------------------------------------
 hl.config({
-  scrolling = {
-    fullscreen_on_one_column = true,
-    column_width = 0.7,
-    focus_fit_method = 1,
-    follow_focus = false,
-    explicit_column_widths = "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0",
-  },
+	scrolling = {
+		fullscreen_on_one_column = true,
+		column_width = 0.7,
+		focus_fit_method = 1,
+		follow_focus = true,
+		explicit_column_widths = "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0",
+	},
+})
+
+-- ------------------------------------------------------------
+-- DWINDLE LAYOUT
+-- ------------------------------------------------------------
+hl.config({
+	dwindle = {
+		force_split = 0,
+		preserve_split = false,
+		smart_split = false,
+		smart_resizing = true,
+		permanent_direction_override = false,
+		special_scale_factor = 1,
+		split_width_multiplier = 1.0,
+		use_active_for_splits = true,
+		default_split_ratio = 1.0,
+		split_bias = 0,
+		precise_mouse_move = false,
+	},
 })

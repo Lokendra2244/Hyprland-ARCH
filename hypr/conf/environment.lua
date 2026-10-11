@@ -4,6 +4,7 @@
 -- ============================================================
 -- See https://wiki.hypr.land/Configuring/Environment-variables/
 
+hl.env("GDK_WAYLAND_DISABLE", "ext_background_effect_manager_v1")
 hl.env("TERM", "ghostty")
 hl.env("XCURSOR_THEME", "Moga-Neon-Butter") -- Replace with your desired theme name
 hl.env("XCURSOR_SIZE", "32")
@@ -13,9 +14,9 @@ hl.env("XCURSOR_SIZE", "32")
 -- Note: changes here require a Hyprland restart, not applied on-the-fly
 -- ============================================================
 hl.config({
-  ecosystem = {
-    enforce_permissions = 1,
-  },
+	ecosystem = {
+		enforce_permissions = 1,
+	},
 })
 
 -- ============================================================

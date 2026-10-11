@@ -37,3 +37,6 @@ require("conf.keybinds")
 
 -- 8. Window rules and layer rules
 require("conf.rules")
+
+-- 9. Clamshell dock setup
+require("conf.clam_shell")

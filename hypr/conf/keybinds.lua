@@ -24,10 +24,10 @@ hl.bind(M .. " + E", exec(fileManager))
 hl.bind(M .. " + W", dsp.window.float({ action = "toggle" }))
 hl.bind(M .. " + F", dsp.window.fullscreen())
 hl.bind(M .. " + P", dsp.window.pseudo()) -- pseudo-tile (dwindle; harmless on scrolling)
-hl.bind(M .. " + l", exec("wlogout"))
+hl.bind(M .. " + SHIFT + q", exec("killall wlogout || wlogout"))
 
 -- Wallpaper toggle
-hl.bind(M .. " + H", exec("killall waypaper || waypaper"))
+hl.bind(M .. " + SHIFT + w", exec("killall waypaper || waypaper"))
 
 -- App launcher (toggle rofi)
 hl.bind(M .. " + SPACE", exec(menu .. " -show drun -show-icons || killall " .. menu))
@@ -101,10 +101,10 @@ hl.bind("XF86AudioPrev", exec("playerctl --player=ncspot previous"), { locked = 
 -- WINDOW FOCUS  (arrow keys)
 -- Direction strings must be full words: "left"/"right"/"up"/"down"
 -- ============================================================
-hl.bind(M .. " + Left", dsp.focus({ direction = "left" }))
-hl.bind(M .. " + Right", dsp.focus({ direction = "right" }))
-hl.bind(M .. " + Up", dsp.focus({ direction = "up" }))
-hl.bind(M .. " + Down", dsp.focus({ direction = "down" }))
+hl.bind(M .. " + h", dsp.focus({ direction = "left" }))
+hl.bind(M .. " + l", dsp.focus({ direction = "right" }))
+hl.bind(M .. " + k", dsp.focus({ direction = "up" }))
+hl.bind(M .. " + j", dsp.focus({ direction = "down" }))
 
 -- ============================================================
 -- WORKSPACE SWITCHING  (1–4, all on DP-1)
@@ -162,18 +162,18 @@ hl.bind(M .. " + mouse_down", dsp.layout("move -col"))
 hl.bind(M .. " + mouse_up", dsp.layout("move +col"))
 
 -- Swap column with its left / right neighbour
-hl.bind(M .. " + SHIFT + bracketleft", dsp.layout("swapcol l"))
-hl.bind(M .. " + SHIFT + bracketright", dsp.layout("swapcol r"))
+hl.bind(M .. " + SHIFT + h", dsp.layout("swapcol l"))
+hl.bind(M .. " + SHIFT + l", dsp.layout("swapcol r"))
 
 -- Cycle through explicit_column_widths (defined in look_and_feel.lua)
 hl.bind(M .. " + equal", dsp.layout("colresize +conf"))
 hl.bind(M .. " + minus", dsp.layout("colresize -conf"))
 
 -- Promote focused window to its own column
-hl.bind(M .. " + SHIFT + P", dsp.layout("promote"))
+hl.bind(M .. " + SHIFT + A", dsp.layout("promote"))
 
 -- Fit the active column to the screen width
-hl.bind(M .. " + M", dsp.layout("fit active"))
+hl.bind(M .. " + A", dsp.layout("fit active"))
 
 -- ============================================================
 -- REMOTE CONNECTION KEYBIND RESET

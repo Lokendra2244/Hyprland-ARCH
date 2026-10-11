@@ -30,7 +30,6 @@
 # key= value
 # key =value
 # key = value
-#
 # # Any line beginning with a # is a comment. It's not possible to put
 # # a comment after a config option, since it would be interpreted as a
 # # part of the value. For example, this will have a value of "#123abc":
@@ -43,8 +42,10 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
- 
 #key-bind
+#
+gtk-single-instance = false
+
 keybind = ctrl+super+arrow_down=goto_split:down
 keybind = ctrl+super+arrow_up=goto_split:up
 keybind = ctrl+super+arrow_right=goto_split:right

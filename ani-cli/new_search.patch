@@ -1,0 +1,52 @@
+diff --git a/ani-cli b/ani-cli
+index 441df24..f6c3c2d 100755
+--- a/ani-cli
++++ b/ani-cli
+@@ -632,7 +632,7 @@ tput sc
+ play
+ [ "$player_function" = "download" ] || [ "$player_function" = "debug" ] && exit 0
+ 
+-while cmd=$(printf "next\nreplay\nprevious\nselect\nchange_quality\nquit" | nth "Playing episode $ep_no of $anime_title... "); do
++while cmd=$(printf "next\nreplay\nprevious\nselect\nchange_quality\nnew_search\nquit" | nth "Playing episode $ep_no of $anime_title... "); do
+     case "$cmd" in
+         next) ep_no=$(printf "%s" "$ep_list" | sed -n "/^${ep_no}$/{n;p;}") 2>/dev/null ;;
+         replay) video_link="$replay" ;;
+@@ -643,6 +643,38 @@ while cmd=$(printf "next\nreplay\nprevious\nselect\nchange_quality\nquit" | nth
+             [ -z "$new_quality" ] && die "No quality selected"
+             select_quality "$new_quality"
+             ;;
++        new_search)
++            if [ "$menu_program" = "fzf" ]; then
++                while [ -z "$new_query" ]; do
++                    printf "\33[2K\r\033[1;36mSearch anime: \033[0m" && read -r new_query
++                done
++            else
++                new_query=$(: | menu "Search anime: " "" "$menu_extra_flags")
++                [ -z "$new_query" ] && continue
++            fi
++            new_query=$(printf "%s" "$new_query" | sed 's| |+|g')
++            new_anime_list=$(hianime_search "$new_query")
++            unset new_query
++            if [ -z "$new_anime_list" ]; then
++                info "No results found!"
++                continue
++            fi
++            new_result=$(printf "%s" "$new_anime_list" | nl -w 2 | sed 's/^[[:space:]]//' | nth "Select anime: ")
++            if [ -z "$new_result" ]; then
++                info "Invalid anime selection"
++                continue
++            fi
++            anime_title="$(printf "%s" "$new_result" | cut -f 2)"
++            anime_id="$(printf "%s" "$new_result" | cut -f 1)"
++            unset new_anime_list new_result
++            episode_maps="$(hianime_episodes "$anime_id")"
++            ep_list="$(printf '%s' "$episode_maps" | cut -f 2)"
++            ep_no=$(printf "%s" "$ep_list" | nth "Select episode: " "$menu_multi_flag")
++            if [ -z "$ep_no" ]; then
++                info "Invalid episode selection"
++                continue
++            fi
++            ;;
+         *)
+             cleanup
+             exit 0
