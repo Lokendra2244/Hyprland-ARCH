@@ -56,5 +56,4 @@ keybind = ctrl+alt+arrow_right=unbind
 keybind = ctrl+alt+arrow_left=unbind
 keybind = global:super+shift+q=toggle_quick_terminal
 
-
-theme = /home/lokendra/.cache/wal/ghostty.conf
+theme = /home/lokendra/.cache/theme/ghostty.conf

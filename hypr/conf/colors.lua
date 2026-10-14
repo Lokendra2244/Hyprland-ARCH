@@ -7,7 +7,12 @@
 -- ~/.cache/wal/colors-hyprland.lua when you run: wal -i <wallpaper>
 -- It returns a table, so we load it with dofile() and index into it.
 
-local ok, wal = pcall(dofile, "/home/lokendra/.cache/wal/colors-hyprland.lua")
+local ok, wal = pcall(dofile, "/home/lokendra/.cache/theme/colors-hyprland.lua")
 
-color1 = wal.color1 -- active border
-color8 = wal.color8 -- inactive border
+if ok and t then
+	color1 = t.accent -- active border + HyprGlass tint
+	color8 = t.color8 -- inactive border
+else
+	color1 = "rgb(89b4fa)"
+	color8 = "rgb(45475a)"
+end

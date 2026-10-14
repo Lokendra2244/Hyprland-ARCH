@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# theme-switch [name | --list | --current | --next | --prev | --random | --restore]
+# No argument = rofi picker.  --restore only re-renders (no reloads), safe at login.
+set -euo pipefail
+THEME_DIR="${THEME_DIR:-$HOME/.config/theme}"
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/theme/active"
+OUT="$HOME/.cache/theme"
+export THEME_DIR
+
+mapfile -t themes < <(find "$THEME_DIR/schemes" -name '*.toml' -printf '%f\n' | sed 's/\.toml$//' | sort)
+cur="$(cat "$STATE" 2>/dev/null || echo "${themes[0]}")"
+reload=1
+
+index_of() {
+  for i in "${!themes[@]}"; do [[ "${themes[$i]}" == "$1" ]] && {
+    echo "$i"
+    return
+  }; done
+  echo 0
+}
+
+case "${1:-}" in
+--list)
+  printf '%s\n' "${themes[@]}"
+  exit 0
+  ;;
+--current)
+  echo "$cur"
+  exit 0
+  ;;
+--restore)
+  name="$cur"
+  reload=0
+  ;;
+--next) name="${themes[$((($(index_of "$cur") + 1) % ${#themes[@]}))]}" ;;
+--prev) name="${themes[$((($(index_of "$cur") + ${#themes[@]} - 1) % ${#themes[@]}))]}" ;;
+--random) name="${themes[RANDOM % ${#themes[@]}]}" ;;
+"")
+  mapfile -t rows < <(python3 "$THEME_DIR/bin/theme-render" --swatches)
+  menu="" sel=0
+  for i in "${!rows[@]}"; do
+    read -r n a b c <<<"${rows[$i]}"
+    [[ "$n" == "$cur" ]] && sel=$i
+    menu+="<span foreground=\"#$a\">●</span> <span foreground=\"#$b\">●</span> <span foreground=\"#$c\">●</span>  $n"$'\n'
+  done
+  idx="$(printf '%s' "$menu" | rofi -dmenu -i -markup-rows -format i -selected-row "$sel" -p "theme" || true)"
+  [[ -n "$idx" ]] || exit 0
+  read -r name _ <<<"${rows[$idx]}"
+  ;;
+*) name="$1" ;;
+esac
+[[ -f "$THEME_DIR/schemes/$name.toml" ]] || {
+  echo "no such theme: $name" >&2
+  exit 1
+}
+
+python3 "$THEME_DIR/bin/theme-render" "$name"
+mkdir -p "$(dirname "$STATE")"
+echo "$name" >"$STATE"
+
+# files that must live somewhere else
+install -Dm644 "$OUT/gtk.css" "$HOME/.config/gtk-4.0/gtk.css"
+install -Dm644 "$OUT/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
+install -Dm644 "$OUT/zellij.kdl" "$HOME/.config/zellij/themes/current.kdl"
+for d in "$HOME"/.zen/*Default*/; do [[ -d "$d" ]] && install -Dm644 "$OUT/user.js" "${d}user.js"; done
+"$THEME_DIR/bin/theme-zen" >/dev/null 2>&1 || true
+
+[[ $reload -eq 1 ]] || exit 0
+
+# restart waybar through the auto-hide script
+pkill -f waybar_auto_hide 2>/dev/null || true
+pkill -x waybar 2>/dev/null || true
+for _ in {1..20}; do
+  pgrep -x waybar >/dev/null || break
+  sleep 0.7
+done
+waybar >/dev/null 2>&1 &
+disown
+sleep 0.5
+# wait up to 2s for it to exit
+/home/lokendra/.config/hypr/scripts/waybar_auto_hide --always-hidden >/dev/null 2>&1 &
+disown
+pkill -SIGUSR2 ghostty 2>/dev/null || true # ghostty reloads its config (new colors)
+hyprctl reload >/dev/null 2>&1 || true     # borders + HyprGlass tint (conf/colors.lua)
+command -v notify-send >/dev/null && notify-send -a theme "Theme" "$name" || true

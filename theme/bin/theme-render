@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+"""theme-render <scheme>  — fill every file in ../templates with a scheme's colors -> ~/.cache/theme
+
+Template syntax:  {{name}}  or  {{name.modifier}}
+  names:     base00..base0F, color0..color15, background, foreground, cursor,
+             accent, accent2, accent3, on_accent      ({{name}} alone gives the scheme title)
+  modifiers: (none) #rrggbb | .strip rrggbb | .rgb "r, g, b" | .space "r g b" | .hypr rgb(rrggbb)
+"""
+import os, re, sys, tomllib, pathlib
+
+ROOT = pathlib.Path(os.environ.get("THEME_DIR", pathlib.Path.home() / ".config/theme"))
+OUT = pathlib.Path(os.environ.get("THEME_OUT", pathlib.Path.home() / ".cache/theme"))
+SLOTS = [f"base{i:02X}" for i in range(16)]
+# standard base16 -> 16 ANSI slots (same layout every theme, so any theme can replace any other)
+ANSI = {0: "base00", 1: "base08", 2: "base0B", 3: "base0A", 4: "base0D", 5: "base0E", 6: "base0C",
+        7: "base05", 8: "base03", 9: "base08", 10: "base0B", 11: "base0A", 12: "base0D",
+        13: "base0E", 14: "base0C", 15: "base07"}
+HEX = re.compile(r"^#?([0-9a-fA-F]{6})$")
+
+
+def lum(h):
+    c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    c = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def contrast(a, b):
+    la, lb = sorted((lum(a), lum(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+def load(name):
+    path = ROOT / "schemes" / f"{name}.toml"
+    if not path.exists():
+        sys.exit(f"theme-render: no scheme '{name}' in {path.parent}")
+    d = tomllib.loads(path.read_text())
+    pal = {}
+    for s in SLOTS:
+        m = HEX.match(str(d["palette"].get(s, "")))
+        if not m:
+            sys.exit(f"theme-render: {name}: palette.{s} missing or not a 6-digit hex")
+        pal[s] = m.group(1).lower()
+
+    def role(key, default):
+        val = d.get(key, default)
+        if val in pal:
+            return pal[val]
+        m = HEX.match(str(val))
+        if not m:
+            sys.exit(f"theme-render: {name}: {key} must be a slot (base0D) or hex")
+        return m.group(1).lower()
+
+    v = dict(pal)
+    for n, s in ANSI.items():
+        v[f"color{n}"] = pal[s]
+    v["background"], v["foreground"], v["cursor"] = pal["base00"], pal["base05"], pal["base05"]
+    v["accent"] = role("accent", "base0D")
+    v["accent2"] = role("accent2", "base0E")
+    v["accent3"] = role("accent3", "base0C")
+    v["on_accent"] = pal["base00"]
+    return d.get("name", name), v
+
+
+def fmt(h, mod):
+    if mod is None:
+        return "#" + h
+    if mod == "strip":
+        return h
+    rgb = [str(int(h[i:i + 2], 16)) for i in (0, 2, 4)]
+    if mod == "rgb":
+        return ", ".join(rgb)
+    if mod == "space":
+        return " ".join(rgb)
+    if mod == "hypr":
+        return f"rgb({h})"
+    sys.exit(f"theme-render: unknown modifier .{mod}")
+
+
+def main():
+    if len(sys.argv) != 2:
+        sys.exit(__doc__)
+    if sys.argv[1] == "--swatches":      # "name accent accent2 accent3" per scheme, for the rofi picker
+        for p in sorted((ROOT / "schemes").glob("*.toml")):
+            _, v = load(p.stem)
+            print(p.stem, v["accent"], v["accent2"], v["accent3"])
+        return   
+    title, v = load(sys.argv[1])
+    for a, b, need in (("foreground", "background", 7.0), ("accent", "background", 3.0),
+                       ("color1", "background", 3.0), ("color2", "background", 3.0)):
+        c = contrast(v[a], v[b])
+        if c < need:
+            print(f"warning: {sys.argv[1]}: {a} on {b} contrast {c:.1f} < {need}", file=sys.stderr)
+
+    pat = re.compile(r"\{\{\s*([A-Za-z0-9_]+)(?:\.([a-z]+))?\s*\}\}")
+
+    def sub(m):
+        k, mod = m.group(1), m.group(2)
+        if k == "name":
+            return title
+        if k not in v:
+            sys.exit(f"theme-render: unknown variable {{{{{k}}}}}")
+        return fmt(v[k], mod)
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    for t in sorted((ROOT / "templates").iterdir()):
+        if t.is_file() and not t.name.startswith("."):
+            tmp = OUT / (t.name + ".tmp")
+            tmp.write_text(pat.sub(sub, t.read_text()))
+            tmp.replace(OUT / t.name)
+    (OUT / "accent").write_text("#" + v["accent"] + "\n")
+    (OUT / "name").write_text(sys.argv[1] + "\n")
+
+
+main()

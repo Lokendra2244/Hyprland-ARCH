@@ -186,3 +186,9 @@ hl.define_submap("passthrough", function()
 end)
 
 hl.bind(M .. " + Escape", dsp.submap("passthrough"))
+
+-- ============================================================
+-- ROFI BASED THEME SELECTOR KEYBIND
+-- ============================================================
+hl.bind(M .. " + T", exec("killall rofi || ~/.local/bin/theme-switch"))
+hl.bind(M .. " + SHIFT + T", exec("~/.local/bin/theme-switch --next"))

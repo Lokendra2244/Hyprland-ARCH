@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# theme-from-wallpaper <wallpaper-path>
+# Parent folder name == scheme name -> switch theme. Anything else -> leave the theme alone.
+wall="$1"
+name="$(basename "$(dirname "$wall")")"
+bin="$HOME/.config/theme/bin"
+
+[[ -f "$HOME/.config/theme/schemes/$name.toml" ]] || exit 0     # loose image or unknown folder: no change
+[[ "$("$bin/theme-switch" --current)" == "$name" ]] && exit 0   # already active: skip the reload
+exec "$bin/theme-switch" "$name"

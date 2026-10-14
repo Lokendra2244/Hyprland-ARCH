@@ -25,7 +25,7 @@ update_interval = "auto"
 #[Static config]
 # See https://psi4j.github.io/sunsetr/configuration/transition-modes.html#5-static-constant-values
 static_temp = 5512
-static_gamma = 82
+static_gamma = 73
 
 #[Manual transitions]
 # See https://psi4j.github.io/sunsetr/configuration/transition-modes.html#manual-transitions

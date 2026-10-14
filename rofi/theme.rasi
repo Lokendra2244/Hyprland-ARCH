@@ -1,4 +1,4 @@
-@import "/home/lokendra/.cache/wal/colors-rofi-dark.rasi"
+@import "/home/lokendra/.cache/theme/colors-rofi-dark.rasi"
 /**
  * rofi -dump-theme output.
  * Rofi version: 1.7.9+wayland1

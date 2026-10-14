@@ -1,7 +1,7 @@
 @define-color default1 rgba(255, 255, 255, 0.1);
 @define-color default2 rgba(0, 0, 0, 0);
 
-@import url("/home/lokendra/.cache/wal/colors-waybar.css");
+@import url("/home/lokendra/.cache/theme/colors-waybar.css");
 
 * {
   /* `otf-font-awesome` is required to be installed for icons */

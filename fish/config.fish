@@ -3,11 +3,6 @@ if status is-interactive
     #blaze integration
     blaze fish --init | source
 
-    # Load Pywal colors if they exist
-    if test -e ~/.cache/wal/sequences
-        cat ~/.cache/wal/sequences
-    end
-
 end
 
 #welcome greeting
